@@ -1,0 +1,53 @@
+﻿@model MikroCrm.UI.ViewModel.CatalogModel.Stock.StockSearchViewModel
+@using PagedList.Mvc;
+@using PagedList;
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Stok Kod</th>
+            <th>Stok Ad</th>
+            <th class="text-center">İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.StockList != null)
+        {
+            if (Model.StockList.Count > 0)
+            {
+                foreach (var item in Model.StockList)
+                {
+                    <tr>
+                        <td>
+                            <label id="stokkod_@item.Id" data-id="@item.StokKod">
+                                @item.StokKod
+                            </label>
+                        </td>
+                        <td>
+                            <label id="stokad_@item.Id" data-id="@item.StokAd">
+                                @item.StokAd
+                            </label>
+                        </td>
+                        <td class="text-center">
+                            <button onclick="stockselect(@item.Id)" class="btn btn-default"><span class="glyphicon glyphicon-ok-sign"></span></button>
+                        </td>
+                    </tr>
+                }
+
+            }
+        }
+
+
+    </tbody>
+</table>
+
+<div class="pull-right" style="padding-right:5px">
+    @Html.PagedListPager(Model.StockList, page => Url.Action("StockList", new RouteValueDictionary
+{
+    {"Page",page},
+    {"StokKod",Model.StokKod},
+    {"StokAd",Model.StokAd}
+}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "catalogstocklist" }))
+
+
+</div>

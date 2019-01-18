@@ -1,0 +1,55 @@
+﻿@model List<MikroCrm.UI.ViewModel.CustomerCrmModel.CustomerAutListViewModel>
+
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="customerAutList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Cari Yetkili</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="table-responsive">
+
+                            <div id="divcustomerautlist">
+                                @Html.Partial("_autList", Model)
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:cariyetkilipopup()" type="button" class="btn btn-success">Yeni yetkili ekle</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function catalogCustomerOnSuccess(result) {
+
+        $("#catalogcustomerlist").html(result);
+    }
+</script>
+
+<script>
+    function cariyetkilipopup() {
+        console.log("cari yetkili popup");
+        $("#customerAutList").modal('hide');
+        $("#customerAutAdd").modal('show');
+    }
+</script>
+
+
+@Html.Action("AddAutCrm", "CustomerCrm")

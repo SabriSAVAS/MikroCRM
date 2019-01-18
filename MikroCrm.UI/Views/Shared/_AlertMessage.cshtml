@@ -1,0 +1,11 @@
+﻿
+
+@if (TempData["Alert"] != null)
+{
+   <div class="alert alert-@TempData["Alert"] alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>@TempData["Alert"].ToString().ToUpper() </strong>@TempData["Message"]
+        </div>
+}
+
+

@@ -1,0 +1,78 @@
+﻿@model MikroCrm.UI.ViewModel.CatalogModel.Customer.CustomerSearchViewModel
+
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="customerPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Cari Liste</h4>
+            </div>
+            <div class="modal-body">
+               
+                <div class="row">
+                    <div class="col-md-12">
+                        @using (Ajax.BeginForm("CustomerList", "Catalog", FormMethod.Post, new AjaxOptions { OnSuccess = "catalogCustomerOnSuccess" }))
+                        {
+                            <div class="form-horizontal">
+                                <div class="panel panel-group">
+
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Cari Kod</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                    @Html.TextBoxFor(x => x.CariKod, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Cari Unvan</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                    @Html.TextBoxFor(x => x.CariUnvan, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <button type="submit" class="pull-right btn btn-info">Ara</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }             
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <div id="catalogcustomerlist">
+                                        @Html.Partial("_customerList", Model)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function catalogCustomerOnSuccess(result) {
+
+        $("#catalogcustomerlist").html(result);
+    }
+</script>

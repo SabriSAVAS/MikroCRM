@@ -1,0 +1,76 @@
+﻿@model  List<MikroCrm.UI.ViewModel.ReportModel.CustomerReportModel>
+@{
+    ViewBag.Title = "CustomerReport";
+}
+
+
+<div class="page-content-wrap">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel-body panel-body-table">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Cari Kod</th>
+                                <th>Cari Ünvan</th>
+                                <th>Vergi No</th>
+                                <th>Bil.Bakım ve Destek</th>
+                                <th>Mikro Uzak Bağ ve Tel Des</th>
+                                <th>Mikro Eğitim Destek</th>
+                                <th>Yedekleme Sistemi</th>
+                                <th>Söz Başlangıç</th>
+                                <th>Söz Bitiş</th>
+                                <th>Yorum 1</th>
+                                <th>Yorum 2</th>
+                                <th>Asistan Başlangıç Tarihi</th>
+                                <th>Asistan İsmi</th>
+                                <th>Kep</th>
+                                <th>e-İmza</th>
+                                <th>Grup Adı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th>@item.CariKod</th>
+                                    <th>@item.CariUnvan</th>
+                                    <th>@item.VergiDairesiNo</th>
+                                    <th>@item.BilBakımveDestek</th>
+                                    <th>@item.MikroUzakBagTelDes</th>
+                                    <th>@item.MikroEgDes</th>
+                                    <th>@item.YedeklemeSistemi</th>
+                                    <th>@string.Format("{0:dd/MMMM/yyyy}", item.SözBas)</th>
+                                    <th>@string.Format("{0:dd/MMMM/yyyy}", item.SözBit)</th>
+                                    <th>@item.Yorum1</th>
+                                    <th>@item.Yorum2</th>
+                                    <th>@string.Format("{0:dd/MMMM/yyyy}", item.AsistanBasTar)</th>
+                                    <th>@item.AsistanIsmi</th>
+                                    <th>@item.Kep</th>
+                                    <th>@item.eImza</th>
+                                    <th>@item.GrupAdı</th>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

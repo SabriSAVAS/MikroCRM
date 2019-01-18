@@ -1,0 +1,287 @@
+﻿@model MikroCrm.UI.ViewModel.CustomerCrmModel.CrmCustomerViewModel
+@{
+    ViewBag.Title = "AddCrm";
+}
+
+<div class="page-content-wrap">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="form-horizontal">
+                @using (Ajax.BeginForm("AddCrm", "CustomerCrm", FormMethod.Post, new AjaxOptions { OnSuccess = "CustomerCrmOnSuccess" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><strong>Müşteri ilişkileri</strong></h3>
+                            <ul class="panel-controls">
+                                <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Öncelik</label>
+                                <div class="col-md-6 col-xs-12">
+                                    @Html.DropDownListFor(x => x.il_oncelik, Model.il_oncelikList, new { @class = "form-control" })
+                                    <span class="help-block">@Html.ValidationMessageFor(x => x.il_cari_tipi)</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Cari tip</label>
+                                <div class="col-md-6 col-xs-12">
+                                    @Html.DropDownListFor(x => x.il_cari_tipi, Model.il_cari_tipiList, new { @class = "form-control" })
+                                    <span class="help-block">@Html.ValidationMessageFor(x => x.il_cari_tipi)</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Cari kod</label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(x => x.il_carikodu, new { @class = "form-control", @id = "CariKod" })
+                                        <span class="input-group-addon" onclick="customerSelect()"><span class="fa fa-plus-square"></span></span>
+                                    </div>
+                                    <span class="help-block">@Html.ValidationMessageFor(x => x.il_carikodu)</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Cari unvan</label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                        <input type="text" class="form-control" id="CariUnvan" value="" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Yetkili Ad</label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        @Html.HiddenFor(x => x.il_yetkiliRecID_RECno)
+                                        @Html.TextBoxFor(x => x.il_yetkiliadi, new { @class = "form-control" })
+                                        <span class="input-group-addon" onclick="customerautList()"><span class="fa fa-plus-square"></span></span>
+                                    </div>
+                                    <span class="help-block">@Html.ValidationMessageFor(x => x.il_yetkiliadi)</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Sorumlu personel</label>
+                                <div class="col-md-6 col-xs-12">
+                                    @Html.DropDownListFor(x => x.il_sorumlu_personel, Model.il_sorumlu_personelList, new { @class = "form-control" })
+                                    <span class="help-block">@Html.ValidationMessageFor(x => x.il_sorumlu_personel)</span>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label class="col-md-3 col-xs-12 control-label">Bas Saat</label>
+                                <div class="col-md-2 col-xs-12">
+                                    <div class="input-group bootstrap-timepicker">
+                                        @Html.TextBoxFor(x => x.il_bassaati, new { @class = "form-control timepicker24" })
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+
+                                    </div>
+                                    <span class="help-block">@Html.ValidationMessageFor(x => x.il_bassaati)</span>
+                                </div>
+
+                                <label class="col-md-1 col-xs-12 control-label">Bit Saat</label>
+                                <div class="col-md-2 col-xs-12">
+                                    <div class="input-group bootstrap-timepicker">
+                                        @Html.TextBoxFor(x => x.il_bitsaati, new { @class = "form-control timepicker24" })
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                    </div>
+                                    <span class="help-block">@Html.ValidationMessageFor(x => x.il_bitsaati)</span>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="col-md-3 col-xs-12 control-label">Bas Tar</label>
+                                    <div class="col-md-2 col-xs-12">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(x => x.il_bitzaman, new { @class = "form-control datepicker" })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+                                        </div>
+                                        <span class="help-block">@Html.ValidationMessageFor(x => x.il_bitzaman)</span>
+                                    </div>
+
+                                    <label class="col-md-1 col-xs-12 control-label">Bit Tar</label>
+                                    <div class="col-md-2 col-xs-12">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(x => x.il_bitzaman, new { @class = "form-control datepicker" })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        <span class="help-block">@Html.ValidationMessageFor(x => x.il_bitzaman)</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">İlişki tipi</label>
+                                <div class="col-md-6 col-xs-12">
+
+                                    @Html.DropDownListFor(x => x.il_iliski_tipi, Model.il_iliski_tipiList, new { @class = "form-control" })
+
+                                    <span class="help-block">@Html.ValidationMessageFor(x => x.il_iliski_tipi)</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Yer</label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                        @Html.TextBoxFor(x => x.il_yer, new { @class = "form-control" })
+                                    </div>
+                                    <span class="help-block">@Html.ValidationMessageFor(x => x.il_yer)</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Konu</label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                        @Html.TextBoxFor(x => x.il_konu, new { @class = "form-control" })
+                                    </div>
+                                    <span class="help-block">@Html.ValidationMessageFor(x => x.il_konu)</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Açıklama</label>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                        @Html.TextAreaFor(x => x.Aciklama, new { @class = "form-control", @rows = "5" })
+                                    </div>
+                                    <span class="help-block">@Html.ValidationMessageFor(x => x.Aciklama)</span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="panel-footer">
+
+                            <button type="submit" class="btn btn-primary pull-right">Kaydet</button>
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/bootstrap-timepicker.min.js"></script>
+
+}
+<script>
+    function customerSelect() {
+        $('#customerPopup').modal('show');
+    }
+    function customerYetkiliSelect() {
+        $('#customerYetkiliPopup').modal('show');
+    }
+</script>
+<script>
+    function customerselect(id) {
+
+        console.log(id);
+
+        if (id > 0) {
+            var carikod = $("#carikod_" + id).attr("data-id");
+
+            var cariuncan = $("#cariunvan_" + id).attr("data-id");
+            console.log(carikod);
+            console.log(cariuncan);
+            if (carikod.length > 0) {
+                $("#CariKod").val(carikod);
+
+                $("#CariUnvan").val(cariuncan);
+                $('#customerPopup').modal('hide');
+            }
+        }
+    }
+</script>
+
+<script>
+    function customerautList() {
+        var kod = $("#CariKod").val();
+        if (kod.length > 0) {
+            $.ajax({
+
+                type: "Post",
+                url: "/CustomerCrm/CustomerAutList",
+                data: { 'carikod': kod },
+                dataType: "html",
+                success: function (data) {
+
+
+                    $("#customerAutList").modal('show');
+                    $("#divcustomerautlist").html(data);
+                }
+            })
+
+
+
+        }
+        else {
+            alert("Musteri seçiniz");
+        }
+    }
+</script>
+
+<script>
+    function customerautselect(id) {
+        if (id > 0) {
+
+            $("#il_yetkiliRecID_RECno").val(id);
+
+            var yetkiliad = $("#aut_" + id).attr("data-id");
+
+            $("#il_yetkiliadi").val(yetkiliad);
+            $("#customerAutList").modal('hide');
+        }
+    }
+</script>
+
+<script>
+    function CustomerCrmOnSuccess(result) {
+        console.log(result);
+        if (result == "1") {
+            window.location.href = "/CustomerCrm/List"
+        }
+        else {
+            noty({ text: result, layout: 'topRight', type: 'warning' });
+        }
+
+
+    }
+</script>
+
+@Html.Action("CustomerList", "Catalog")
+
+@Html.Action("CustomerAutList", "CustomerCrm")
+

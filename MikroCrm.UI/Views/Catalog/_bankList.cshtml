@@ -1,0 +1,53 @@
+﻿@model MikroCrm.UI.ViewModel.CatalogModel.Bank.BankSearchViewModel
+@using PagedList.Mvc;
+@using PagedList;
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Cari Kod</th>
+            <th>Cari Unvan</th>
+            <th class="text-center">İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.BankList != null)
+        {
+            if (Model.BankList.Count > 0)
+            {
+                foreach (var item in Model.BankList)
+                {
+                    <tr>
+                        <td>
+                            <label id="bankakod_@item.Id" data-id="@item.BankaKod">
+                                @item.BankaKod
+                            </label>
+                        </td>
+                        <td>
+                            <label id="bankaismi_@item.Id" data-id="@item.BankaIsmi">
+                                @item.BankaIsmi
+                            </label>
+                        </td>
+                        <td class="text-center">
+                            <button onclick="bankselect1(@item.Id)" class="btn btn-default"><span class="glyphicon glyphicon-ok-sign"></span></button>
+                        </td>
+                    </tr>
+                }
+
+            }
+        }
+
+
+    </tbody>
+</table>
+
+<div class="pull-right" style="padding-right:5px">
+    @Html.PagedListPager(Model.BankList, page => Url.Action("BankList", new RouteValueDictionary
+{
+    {"Page",page},
+    {"BankaKod",Model.BankaKod},
+    {"Bankaismi",Model.Bankaismi}
+}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "catalogbankalist" }))
+
+
+</div>

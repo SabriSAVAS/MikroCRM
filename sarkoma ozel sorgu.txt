@@ -1,0 +1,99 @@
+create proc prc_CariTakipRaporu
+as
+begin
+select c.cari_kod as [CariKod],c.cari_unvan1 as [CariUnvan],c.cari_vdaire_no as [VergiDairesiNo],
+
+case 
+when ch.BilgisayarBakim='true'  then 'Var'
+when ch.BilgisayarBakim='false'  then 'Yok'
+end AS [BilBakýmveDestek],
+
+
+case 
+when ch.MikroDestek='true'  then 'Var'
+when ch.MikroDestek='false'  then 'Yok'
+end as [MikroUzakBagTelDes],
+
+case 
+when ch.MikroEgitim='true'  then 'Var'
+when ch.MikroEgitim='false'  then 'Yok'
+end as [MikroEgDes],
+
+case 
+when ch.YedeklemeVarMI='true'  then 'Var'
+when ch.YedeklemeVarMI='false'  then 'Yok'
+end as [YedeklemeSistemi],
+
+ch.SozlesmeBaslangic as [SözBas],
+ch.SozlesmeBitis as  [SözBit],
+ch.Yorum1 as [Yorum1],
+ch.Yorum2 as [Yorum2],
+
+
+
+
+(select top 1 chz_aciklama1 from STOK_SERINO_TANIMLARI where
+ 
+ (chz_stok_kodu='MAS-SSM'  OR 
+ chz_stok_kodu='MAS-ACE'  OR
+ chz_stok_kodu='MAS-ACD'  OR
+ chz_stok_kodu='MAS-EKM'  OR
+ chz_stok_kodu='MAS-ESM'  OR
+ chz_stok_kodu='MAS-SEP'  OR
+ chz_stok_kodu='MAS-SSP'  OR
+ chz_stok_kodu='MAS-9SM'  OR
+ chz_stok_kodu='MAS-RERP' OR
+ chz_stok_kodu='MAS-RTL'  OR
+ chz_stok_kodu='MAS-RTLE' OR
+ chz_stok_kodu='MAS-EKP' )
+ 
+  and chz_st_cari_kodu=c.cari_kod and 
+ chz_st_evr_seri='SRK17' and LEN(chz_aciklama1)>5 order by chz_st_tarih desc
+) as  [AsistanBasTar],
+
+
+(Select s.sto_isim from STOKLAR s where s.sto_kod=(select top 1 chz_stok_kodu from STOK_SERINO_TANIMLARI where
+ 
+ (chz_stok_kodu='MAS-SSM'  OR 
+ chz_stok_kodu='MAS-ACE'  OR
+ chz_stok_kodu='MAS-ACD'  OR
+ chz_stok_kodu='MAS-EKM'  OR
+ chz_stok_kodu='MAS-ESM'  OR
+ chz_stok_kodu='MAS-SEP'  OR
+ chz_stok_kodu='MAS-SSP'  OR
+ chz_stok_kodu='MAS-9SM'  OR
+ chz_stok_kodu='MAS-RERP' OR
+ chz_stok_kodu='MAS-RTL'  OR
+ chz_stok_kodu='MAS-RTLE' OR
+ chz_stok_kodu='MAS-EKP' )
+ 
+  and chz_st_cari_kodu=c.cari_kod and 
+ chz_st_evr_seri='SRK17' order by chz_st_tarih desc
+)) as  [AsistanIsmi],
+
+
+(select top 1 chz_st_tarih from STOK_SERINO_TANIMLARI where
+ 
+ (chz_stok_kodu='MKH-001'  OR 
+ chz_stok_kodu='MKH-002'  OR
+ chz_stok_kodu='MKH-003'  OR
+ chz_stok_kodu='MKH-004'  OR
+ chz_stok_kodu='MKH-005'  OR
+ chz_stok_kodu='MKH-006'  OR
+chz_stok_kodu='MKH-50' 
+   )
+ 
+  and chz_st_cari_kodu=c.cari_kod and 
+ chz_st_evr_seri='SRK17' order by chz_st_tarih desc
+) as [KonturBasTar],
+
+ch.kep as [Kep],
+ch.eimza as [eImza],
+
+(select crg_isim from CARI_HESAP_GRUPLARI where  crg_kod=c.cari_grup_kodu ) as [GrupAdý]
+
+from CARI_HESAPLAR c  left  join CARI_HESAPLAR_USER ch on c.cari_RECid_RECno=ch.RecID_RECno
+where c.cari_kod like '120%'  and c.cari_grup_kodu!='B'
+order by  [KonturBasTar] desc
+
+end

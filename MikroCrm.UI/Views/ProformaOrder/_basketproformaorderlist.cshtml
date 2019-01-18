@@ -1,0 +1,98 @@
+﻿@model MikroCrm.UI.ViewModel.ProformaOrderModel.ProformaOrderViewModel
+
+
+<table class="table table-bordered table-striped table-actions">
+ 
+    <thead>
+        <tr>
+            <th>Hizmet tip</th>
+            <th>Hizmet adi</th>
+            <th class="text-center"><span class="glyphicon glyphicon-cog"></span> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ProformaOrderList != null)
+        {
+            
+            if (Model.ProformaOrderList.Count > 0)
+            {
+
+                foreach (var item in Model.ProformaOrderList)
+                {
+                    <tr id="row_@item.Id">
+                        <th>@item.HizmetTip</th>
+                        <th>@item.HizmetAd</th>
+                        <th class="text-center">
+                            <a class="btn btn-danger btn-sm" data-id="@item.HizmetKod" id="stok_@item.Id" href="javascript:OrderDeleteRow(@item.Id)"><span class="glyphicon glyphicon-trash"></span></a>
+                        </th>
+                    </tr>
+                
+                }
+            }
+        }
+    </tbody>
+
+</table>
+
+
+
+
+@*<script>
+
+    function OrderDeleteRow(row) {
+        var stokkod = $("#stok_" + row).attr("data-id");
+     
+        console.log(stokkod);
+        if (stokkod.length > 0) {
+
+            var box = $("#mb-remove-row");
+            box.addClass("open");
+
+            box.find(".mb-control-yes").on("click", function () {
+                box.removeClass("open");
+
+                $.ajax({
+                    type: "Post",
+                    url: "/ProformaOrder/OrderDeleteRow",
+                    data: { 'stokkod': stokkod },
+                    dataTpe: "Json",
+                    success: function (data) {
+                        if (data == "1") {
+                          //  GetBasketOrderList();
+                            $("#row_" + row).hide("slow", function () {
+                                $("#row_" + row).remove();
+                            });
+                          
+                        }
+                    }
+
+                });
+             
+            });
+            
+            
+        }
+
+    }
+
+</script>
+
+
+<div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span>Veriyi<strong>Sil</strong> ?</div>
+            <div class="mb-content">
+                <p>Bu satırı silmek istediğinizden eminmisiniz?</p>
+                <p>Eminsen Evet'e basın.</p>
+            </div>
+            <div class="mb-footer">
+                <div class="pull-right">
+                    <a href="javascript:void(0)" class="btn btn-success btn-lg mb-control-yes">Evet</a>
+                    <a href="javascript:void(0)" class="btn btn-default btn-lg mb-control-close">Hayır</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+

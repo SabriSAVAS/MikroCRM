@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- META SECTION -->
+    <title>Mikro Crm Portal</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <!-- END META SECTION -->
+    <!-- CSS INCLUDE -->
+    <link href="~/Content/theme-default.css" rel="stylesheet" />
+    <link href="~/Content/loading.css" rel="stylesheet" />
+
+   
+    <!-- EOF CSS INCLUDE -->
+</head>
+<body>
+    <!-- START PAGE CONTAINER -->
+    <div class="page-container page-navigation-top">
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+
+            <!-- START X-NAVIGATION VERTICAL -->
+            <ul class="x-navigation x-navigation-horizontal">
+                <li class="xn-logo">
+                    <a href="/Home">Mikro CRM</a>
+                    <a href="#" class="x-navigation-control"></a>
+                </li>
+                <li class="xn-openable">
+                    <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">Ayarlar</span></a>
+                    <ul>
+                        <li><a href="/User/List"><span class="fa fa-pencil"></span> Kullanicilar</a></li>
+                      
+                    </ul>
+                </li>
+                <li class="xn-openable">
+                    <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Mikro Crm</span></a>
+                    <ul>
+                        <li><a href="/CustomerCrm/List"><span class="fa fa-pencil"></span> Musteri Ilişkileri</a></li>
+                    </ul>
+                </li>
+                <li class="xn-openable">
+                    <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Siparis Yönetim</span></a>
+                    <ul>
+                        <li><a href="/Order/List"><span class="fa fa-pencil"></span>Siparisler</a></li>
+                    </ul>
+                </li>
+                <li class="xn-openable">
+                    <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Servis Yönetim</span></a>
+                    <ul>
+                        <li><a href="/ProformaOrder/List"><span class="fa fa-pencil"></span>Servisler</a></li>
+                    </ul>
+                </li>
+                <li class="xn-openable">
+                    <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Raporlar</span></a>
+                    <ul>
+                        <li><a href="/Report/Customer"><span class="fa fa-pencil"></span>Cari Hareketler</a></li>
+
+                        <li><a href="/Report/Stock"><span class="fa fa-pencil"></span>Stok Hareketler</a></li>
+
+                        <li><a href="/Report/Bank"><span class="fa fa-pencil"></span>Banka Hareketler</a></li>
+
+                        <li><a href="/Report/CustomerSearch"><span class="fa fa-pencil"></span>Cari Sorgulama</a></li>
+                      
+                          <li><a href="/Report/CustomerReport"><span class="fa fa-pencil"></span>Cari Takip Raporu</a></li>
+                    </ul>
+                </li>
+                <!-- SIGN OUT -->
+                <li class="xn-icon-button pull-right">
+                    <a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>
+                </li>
+                <!-- END SIGN OUT -->
+               <li class="xn-openable pull-right">
+                    <a class="mb-control" href="#">
+                        <span class="glyphicon glyphicon-flash"></span> <span class="xn-text">
+                            @if (Html.GetSettingData()!=null)
+                            { <span class="label label-success">@Html.GetSettingData().DataBase</span>}
+                            else
+                            {
+                                <span class="label label-danger">Bilinmiyor...</span>
+                            }
+                        </span>
+                    </a>
+
+                </li>
+                
+            </ul>
+            <!-- END X-NAVIGATION VERTICAL -->
+            @Html.Partial("~/Views/Shared/_AlertMessage.cshtml")
+            <div style="display:none;" id="loader"></div>
+
+            @RenderBody()
+
+        </div>
+    </div>
+
+    <!-- END PAGE CONTAINER -->
+    <!-- MESSAGE BOX-->
+    <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa fa-sign-out"></span> Çıkış <strong>yap</strong> ?</div>
+                <div class="mb-content">
+                    <p>Çıkış yapmak istediğinizden emin misiniz?</p>
+                    <p>Çalışmaya devam etmek isterseniz Hayır tuşuna basın. Geçerli kullanıcıyı kapatmak için Evet tuşuna basın</p>
+                </div>
+                <div class="mb-footer">
+                    <div class="pull-right">
+                        <a href="/Login/SingOut" class="btn btn-success btn-lg">Evet</a>
+                        <button class="btn btn-default btn-lg mb-control-close">Hayır</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MESSAGE BOX-->
+    <!-- START PRELOADS -->
+
+    <audio id="audio-alert" src="~/Content/audio/alert.mp3" preload="auto"></audio>
+    <audio id="audio-fail" src="~/Content/audio/fail.mp3" preload="auto"></audio>
+    <!-- END PRELOADS -->
+    <!-- START SCRIPTS -->
+    <!-- START PLUGINS -->
+    <script src="~/Scripts/js/jQuery-2.2.0.min.js"></script>
+    <script src="~/Scripts/js/jquery-ui.min.js"></script>
+    @*<script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>*@
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <!-- END PLUGINS -->
+    <!-- THIS PAGE PLUGINS -->
+    <script src="~/Scripts/icheck.min.js"></script>
+    <script src="~/Scripts/jquery.mCustomScrollbar.min.js"></script>
+    <!-- END PAGE PLUGINS -->
+    <!-- START TEMPLATE -->
+
+    <script src="~/Scripts/jquery.noty.js"></script>
+    <script src="~/Scripts/topRight.js"></script>
+    <script src="~/Scripts/default.js"></script>
+
+    <script src="~/Scripts/plugins.js"></script>
+    <script src="~/Scripts/actions.js"></script>
+    <!-- END TEMPLATE -->
+    <!-- END SCRIPTS -->
+
+    
+    @RenderSection("scripts", false)
+</body>
+</html>

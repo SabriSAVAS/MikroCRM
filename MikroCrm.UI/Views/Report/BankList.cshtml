@@ -1,0 +1,180 @@
+﻿@model MikroCrm.UI.ViewModel.ReportModel.Bank.ReportBankSearchViewModel
+@{
+    ViewBag.Title = "BankList";
+}
+
+
+<div class="page-content-wrap">
+    @using (Ajax.BeginForm("BankList", "Report", FormMethod.Post, new AjaxOptions { OnSuccess = "ajaxbankreportsuccess", OnBegin = "showPage()", OnComplete = "offPage()", OnFailure = "offPage()" }))
+    {
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Arama
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Banka Kod</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(x => x.BankaKod, new { @class = "form-control" })
+                                                <span onclick="BankSelect()" class="input-group-addon"><span class="fa fa-plus-square"></span></span>
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.BankaKod)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Banka İsmi</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                @Html.TextBoxFor(x => x.Bankaismi, new { @class = "form-control" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.Bankaismi)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">İlk Tarih</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                @Html.TextBoxFor(x => x.startDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.startDate)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Son Tarih</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                @Html.TextBoxFor(x => x.endDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.endDate)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-footer">
+                            <a href="javascript:mailsendpopup()" class="btn btn-default">Mail gönder</a>
+                            <button type="submit" class="pull-right btn btn-info">Ara</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading ui-draggable-handle">
+                    <h3 class="panel-title">Banka hareket listesi</h3>
+                    <ul class="panel-controls">
+
+                        <li>
+
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="panel-body panel-body-table tab-content">
+
+                    <div class="table-responsive">
+                        <div id="reportbankList">
+                            @Html.Partial("_reportbanklist", Model)
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="panel-footer">
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_mailsendPopup")
+
+@Html.Action("BankList", "Catalog")
+
+
+@section scripts{
+    <script>
+        function BankSelect() {
+            $('#bankPopup').modal('show');
+        }
+    </script>
+
+    <script>
+        function bankselect1(id) {
+
+            console.log(id);
+
+            if (id>0) {
+                var BankaKod = $("#bankakod_" + id).attr("data-id");
+
+                var Bankaismi = $("#bankaismi_" + id).attr("data-id");
+                console.log(BankaKod);
+                console.log(Bankaismi);
+                if (BankaKod.length > 0) {
+                    $("#BankaKod").val(BankaKod);
+
+                    $("#Bankaismi").val(Bankaismi);
+                    $('#bankPopup').modal('hide');
+                }
+            }
+        }
+    </script>
+
+    <script>
+    function mailsendpopup() {
+        $("#mailsendpopup").modal("show");
+    }
+    </script>
+
+    <script>
+        function showPage() {
+            console.log("show");
+            document.getElementById("loader").style.display = "block";
+
+        }
+        function offPage() {
+            console.log("off");
+            document.getElementById("loader").style.display = "none";
+
+        }
+    </script>
+    <script>
+        function ajaxbankreportsuccess(result) {
+
+            $("#reportbankList").html(result);
+        }
+    </script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+}
+
+

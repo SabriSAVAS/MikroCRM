@@ -1,0 +1,1177 @@
+
+create proc [dbo].[prc_EVRAK_ACIKLAMALARI_Insert]
+				@egk_RECno int
+			,@egk_RECid_DBCno smallint
+           ,@egk_RECid_RECno int
+           ,@egk_SpecRECno int
+           ,@egk_iptal bit
+           ,@egk_fileid smallint
+           ,@egk_hidden bit
+           ,@egk_kilitli bit
+           ,@egk_degisti bit
+           ,@egk_checksum int
+           ,@egk_create_user smallint
+           ,@egk_create_date datetime
+           ,@egk_lastup_user smallint
+           ,@egk_lastup_date datetime
+           ,@egk_special1 nvarchar(4)
+           ,@egk_special2 nvarchar(4)
+           ,@egk_special3 nvarchar(4)
+           ,@egk_dosyano smallint
+           ,@egk_hareket_tip tinyint
+           ,@egk_evr_tip tinyint
+           ,@egk_evr_seri nvarchar(4)
+           ,@egk_evr_sira int
+           ,@egk_evr_ustkod nvarchar(25)
+           ,@egk_evr_doksayisi smallint
+           ,@egk_evracik1 nvarchar(127)=''
+           ,@egk_evracik2 nvarchar(127)=''
+           ,@egk_evracik3 nvarchar(127)=''
+           ,@egk_evracik4 nvarchar(127)=''
+           ,@egk_evracik5 nvarchar(127)=''
+           ,@egk_evracik6 nvarchar(127)=''
+           ,@egk_evracik7 nvarchar(127)=''
+           ,@egk_evracik8 nvarchar(127)=''
+           ,@egk_evracik9 nvarchar(127)=''
+           ,@egk_evracik10 nvarchar(127)=''
+           ,@egk_sipgenkarorani float
+           ,@egk_kargokodu nvarchar(25)
+           ,@egk_kargono nvarchar(15)
+           ,@egk_tesaltarihi datetime
+           ,@egk_tesalkisi nvarchar(50)
+           ,@egk_prevwiewsayisi smallint
+           ,@egk_emailsayisi smallint
+           ,@egk_Evrakopno_verildi_fl bit
+
+as
+INSERT INTO [dbo].[EVRAK_ACIKLAMALARI]
+           ([egk_RECid_DBCno]
+           ,[egk_RECid_RECno]
+           ,[egk_SpecRECno]
+           ,[egk_iptal]
+           ,[egk_fileid]
+           ,[egk_hidden]
+           ,[egk_kilitli]
+           ,[egk_degisti]
+           ,[egk_checksum]
+           ,[egk_create_user]
+           ,[egk_create_date]
+           ,[egk_lastup_user]
+           ,[egk_lastup_date]
+           ,[egk_special1]
+           ,[egk_special2]
+           ,[egk_special3]
+           ,[egk_dosyano]
+           ,[egk_hareket_tip]
+           ,[egk_evr_tip]
+           ,[egk_evr_seri]
+           ,[egk_evr_sira]
+           ,[egk_evr_ustkod]
+           ,[egk_evr_doksayisi]
+           ,[egk_evracik1]
+           ,[egk_evracik2]
+           ,[egk_evracik3]
+           ,[egk_evracik4]
+           ,[egk_evracik5]
+           ,[egk_evracik6]
+           ,[egk_evracik7]
+           ,[egk_evracik8]
+           ,[egk_evracik9]
+           ,[egk_evracik10]
+           ,[egk_sipgenkarorani]
+           ,[egk_kargokodu]
+           ,[egk_kargono]
+           ,[egk_tesaltarihi]
+           ,[egk_tesalkisi]
+           ,[egk_prevwiewsayisi]
+           ,[egk_emailsayisi]
+           ,[egk_Evrakopno_verildi_fl])
+     VALUES
+            (@egk_RECid_DBCno 
+           ,@egk_RECid_RECno 
+           ,@egk_SpecRECno 
+           ,@egk_iptal 
+           ,@egk_fileid 
+           ,@egk_hidden 
+           ,@egk_kilitli 
+           ,@egk_degisti 
+           ,@egk_checksum 
+           ,@egk_create_user 
+           ,@egk_create_date 
+           ,@egk_lastup_user 
+           ,@egk_lastup_date 
+           ,@egk_special1 
+           ,@egk_special2 
+           ,@egk_special3 
+           ,@egk_dosyano 
+           ,@egk_hareket_tip 
+           ,@egk_evr_tip 
+           ,@egk_evr_seri 
+           ,@egk_evr_sira 
+           ,@egk_evr_ustkod 
+           ,@egk_evr_doksayisi 
+           ,@egk_evracik1 
+           ,@egk_evracik2 
+           ,@egk_evracik3 
+           ,@egk_evracik4 
+           ,@egk_evracik5 
+           ,@egk_evracik6 
+           ,@egk_evracik7 
+           ,@egk_evracik8 
+           ,@egk_evracik9 
+           ,@egk_evracik10 
+           ,@egk_sipgenkarorani 
+           ,@egk_kargokodu 
+           ,@egk_kargono 
+           ,@egk_tesaltarihi 
+           ,@egk_tesalkisi 
+           ,@egk_prevwiewsayisi 
+           ,@egk_emailsayisi 
+           ,@egk_Evrakopno_verildi_fl)
+
+		    UPDATE EVRAK_ACIKLAMALARI SET egk_RECid_RECno=egk_RECno WHERE egk_RECno<>egk_RECid_RECno
+
+
+go
+create proc [dbo].[prc_PROFORMA_SIPARISLER_Insert]
+			@pro_RECno int
+			,@pro_RECid_DBCno smallint
+           ,@pro_RECid_RECno int
+           ,@pro_SpecRecNo int
+           ,@pro_iptal bit
+           ,@pro_fileid smallint
+           ,@pro_hidden bit
+           ,@pro_kilitli bit
+           ,@pro_degisti bit
+           ,@pro_checksum int
+           ,@pro_create_user smallint
+           ,@pro_create_date datetime
+           ,@pro_lastup_user smallint
+           ,@pro_lastup_date datetime
+           ,@pro_special1 nvarchar(4)
+           ,@pro_special2 nvarchar(4)
+           ,@pro_special3 nvarchar(4)
+           ,@pro_firmano int
+           ,@pro_subeno int
+           ,@pro_tarihi datetime
+           ,@pro_testarihi datetime
+           ,@pro_tipi tinyint
+           ,@pro_cinsi tinyint
+           ,@pro_evrakno_seri nvarchar(25)
+           ,@pro_evrakno_sira int
+           ,@pro_satirno int
+           ,@pro_belge_no nvarchar(25)
+           ,@pro_belge_tarihi datetime
+           ,@pro_saticikodu nvarchar(25)
+           ,@pro_mustkodu nvarchar(25)
+           ,@pro_stokkodu nvarchar(25)
+           ,@pro_bfiyati float
+           ,@pro_miktar float
+           ,@pro_birim_pntr tinyint
+           ,@pro_tesmiktari float
+           ,@pro_tutari float
+           ,@pro_iskonto1 float
+           ,@pro_iskonto2 float
+           ,@pro_iskonto3 float
+           ,@pro_iskonto4 float
+           ,@pro_iskonto5 float
+           ,@pro_iskonto6 float
+           ,@pro_masraf1 float
+           ,@pro_masraf2 float
+           ,@pro_masraf3 float
+           ,@pro_masraf4 float
+           ,@pro_vergipntr tinyint
+           ,@pro_vergi float
+           ,@pro_masrafvergipntr tinyint
+           ,@pro_masrafvergi float
+           ,@pro_opno int
+           ,@pro_aciklama nvarchar(50)
+           ,@pro_aciklama2 nvarchar(50)
+           ,@pro_depono int
+           ,@pro_onaylayanKul_no smallint
+           ,@pro_vergisiz bit
+           ,@pro_kapat bit
+           ,@pro_promosyon_fl bit
+           ,@pro_cari_sormerk nvarchar(25)
+           ,@pro_stok_sormerk nvarchar(25)
+           ,@pro_cari_grupno tinyint
+           ,@pro_dovizcinsi tinyint
+           ,@pro_dovizkuru float
+           ,@pro_altdovizkuru float
+           ,@pro_adresno int
+           ,@pro_teslimturu nvarchar(4)
+           ,@pro_cagrilabilir_fl bit
+           ,@pro_sipDbID smallint
+           ,@pro_sipRecID int
+           ,@pro_isk_mas_1 tinyint
+           ,@pro_isk_mas_2 tinyint
+           ,@pro_isk_mas_3 tinyint
+           ,@pro_isk_mas_4 tinyint
+           ,@pro_isk_mas_5 tinyint
+           ,@pro_isk_mas_6 tinyint
+           ,@pro_isk_mas_7 tinyint
+           ,@pro_isk_mas_8 tinyint
+           ,@pro_isk_mas_9 tinyint
+           ,@pro_isk_mas_10 tinyint
+           ,@pro_sat_isk_mas1 bit
+           ,@pro_sat_isk_mas2 bit
+           ,@pro_sat_isk_mas3 bit
+           ,@pro_sat_isk_mas4 bit
+           ,@pro_sat_isk_mas5 bit
+           ,@pro_sat_isk_mas6 bit
+           ,@pro_sat_isk_mas7 bit
+           ,@pro_sat_isk_mas8 bit
+           ,@pro_sat_isk_mas9 bit
+           ,@pro_sat_isk_mas10 bit
+           ,@pro_Exp_Imp_Kodu nvarchar(25)
+           ,@pro_karoani float
+           ,@pro_durumu tinyint
+           ,@pro_stalRecId_DBCno smallint
+           ,@pro_stalRecId_RECno int
+           ,@pro_planlananmiktar float
+           ,@pro_teklifRecId_DBCno smallint
+           ,@pro_teklifRecId_RECno int
+           ,@pro_parti_kodu nvarchar(25)
+           ,@pro_lot_no int
+           ,@pro_projekodu nvarchar(25)
+           ,@pro_fiyat_liste_no int
+           ,@pro_Otv_Pntr tinyint
+           ,@pro_Otv_Vergi float
+           ,@pro_otvtutari float
+           ,@pro_OtvVergisiz_Fl tinyint
+           ,@pro_paket_kod nvarchar(25)
+           ,@pro_RezRecId_DBCno smallint
+           ,@pro_RezRecId_RECno int
+           ,@pro_harekettipi tinyint
+           ,@pro_yetkili_recid_dbcno smallint
+           ,@pro_yetkili_recid_recno int
+           ,@pro_kapatmanedenkod nvarchar(25)
+           ,@pro_gecerlilik_tarihi datetime
+           ,@pro_onodeme_evrak_tip tinyint
+           ,@pro_onodeme_evrak_seri nvarchar(25)
+           ,@pro_onodeme_evrak_sira int
+           ,@pro_rezervasyon_miktari float
+           ,@pro_rezerveden_teslim_edilen float
+as
+INSERT INTO [dbo].[PROFORMA_SIPARISLER]
+           ([pro_RECid_DBCno]
+           ,[pro_RECid_RECno]
+           ,[pro_SpecRecNo]
+           ,[pro_iptal]
+           ,[pro_fileid]
+           ,[pro_hidden]
+           ,[pro_kilitli]
+           ,[pro_degisti]
+           ,[pro_checksum]
+           ,[pro_create_user]
+           ,[pro_create_date]
+           ,[pro_lastup_user]
+           ,[pro_lastup_date]
+           ,[pro_special1]
+           ,[pro_special2]
+           ,[pro_special3]
+           ,[pro_firmano]
+           ,[pro_subeno]
+           ,[pro_tarihi]
+           ,[pro_testarihi]
+           ,[pro_tipi]
+           ,[pro_cinsi]
+           ,[pro_evrakno_seri]
+           ,[pro_evrakno_sira]
+           ,[pro_satirno]
+           ,[pro_belge_no]
+           ,[pro_belge_tarihi]
+           ,[pro_saticikodu]
+           ,[pro_mustkodu]
+           ,[pro_stokkodu]
+           ,[pro_bfiyati]
+           ,[pro_miktar]
+           ,[pro_birim_pntr]
+           ,[pro_tesmiktari]
+           ,[pro_tutari]
+           ,[pro_iskonto1]
+           ,[pro_iskonto2]
+           ,[pro_iskonto3]
+           ,[pro_iskonto4]
+           ,[pro_iskonto5]
+           ,[pro_iskonto6]
+           ,[pro_masraf1]
+           ,[pro_masraf2]
+           ,[pro_masraf3]
+           ,[pro_masraf4]
+           ,[pro_vergipntr]
+           ,[pro_vergi]
+           ,[pro_masrafvergipntr]
+           ,[pro_masrafvergi]
+           ,[pro_opno]
+           ,[pro_aciklama]
+           ,[pro_aciklama2]
+           ,[pro_depono]
+           ,[pro_onaylayanKul_no]
+           ,[pro_vergisiz]
+           ,[pro_kapat]
+           ,[pro_promosyon_fl]
+           ,[pro_cari_sormerk]
+           ,[pro_stok_sormerk]
+           ,[pro_cari_grupno]
+           ,[pro_dovizcinsi]
+           ,[pro_dovizkuru]
+           ,[pro_altdovizkuru]
+           ,[pro_adresno]
+           ,[pro_teslimturu]
+           ,[pro_cagrilabilir_fl]
+           ,[pro_sipDbID]
+           ,[pro_sipRecID]
+           ,[pro_isk_mas_1]
+           ,[pro_isk_mas_2]
+           ,[pro_isk_mas_3]
+           ,[pro_isk_mas_4]
+           ,[pro_isk_mas_5]
+           ,[pro_isk_mas_6]
+           ,[pro_isk_mas_7]
+           ,[pro_isk_mas_8]
+           ,[pro_isk_mas_9]
+           ,[pro_isk_mas_10]
+           ,[pro_sat_isk_mas1]
+           ,[pro_sat_isk_mas2]
+           ,[pro_sat_isk_mas3]
+           ,[pro_sat_isk_mas4]
+           ,[pro_sat_isk_mas5]
+           ,[pro_sat_isk_mas6]
+           ,[pro_sat_isk_mas7]
+           ,[pro_sat_isk_mas8]
+           ,[pro_sat_isk_mas9]
+           ,[pro_sat_isk_mas10]
+           ,[pro_Exp_Imp_Kodu]
+           ,[pro_karoani]
+           ,[pro_durumu]
+           ,[pro_stalRecId_DBCno]
+           ,[pro_stalRecId_RECno]
+           ,[pro_planlananmiktar]
+           ,[pro_teklifRecId_DBCno]
+           ,[pro_teklifRecId_RECno]
+           ,[pro_parti_kodu]
+           ,[pro_lot_no]
+           ,[pro_projekodu]
+           ,[pro_fiyat_liste_no]
+           ,[pro_Otv_Pntr]
+           ,[pro_Otv_Vergi]
+           ,[pro_otvtutari]
+           ,[pro_OtvVergisiz_Fl]
+           ,[pro_paket_kod]
+           ,[pro_RezRecId_DBCno]
+           ,[pro_RezRecId_RECno]
+           ,[pro_harekettipi]
+           ,[pro_yetkili_recid_dbcno]
+           ,[pro_yetkili_recid_recno]
+           ,[pro_kapatmanedenkod]
+           ,[pro_gecerlilik_tarihi]
+           ,[pro_onodeme_evrak_tip]
+           ,[pro_onodeme_evrak_seri]
+           ,[pro_onodeme_evrak_sira]
+           ,[pro_rezervasyon_miktari]
+           ,[pro_rezerveden_teslim_edilen])
+     VALUES
+	  (@pro_RECid_DBCno 
+           ,@pro_RECid_RECno 
+           ,@pro_SpecRecNo 
+           ,@pro_iptal 
+           ,@pro_fileid 
+           ,@pro_hidden 
+           ,@pro_kilitli 
+           ,@pro_degisti 
+           ,@pro_checksum 
+           ,@pro_create_user 
+           ,@pro_create_date 
+           ,@pro_lastup_user 
+           ,@pro_lastup_date 
+           ,@pro_special1 
+           ,@pro_special2 
+           ,@pro_special3 
+           ,@pro_firmano 
+           ,@pro_subeno 
+           ,@pro_tarihi 
+           ,@pro_testarihi 
+           ,@pro_tipi 
+           ,@pro_cinsi 
+           ,@pro_evrakno_seri 
+           ,@pro_evrakno_sira 
+           ,@pro_satirno 
+           ,@pro_belge_no 
+           ,@pro_belge_tarihi 
+           ,@pro_saticikodu 
+           ,@pro_mustkodu 
+           ,@pro_stokkodu 
+           ,@pro_bfiyati 
+           ,@pro_miktar 
+           ,@pro_birim_pntr 
+           ,@pro_tesmiktari 
+           ,@pro_tutari 
+           ,@pro_iskonto1 
+           ,@pro_iskonto2 
+           ,@pro_iskonto3 
+           ,@pro_iskonto4 
+           ,@pro_iskonto5 
+           ,@pro_iskonto6 
+           ,@pro_masraf1 
+           ,@pro_masraf2 
+           ,@pro_masraf3 
+           ,@pro_masraf4 
+           ,@pro_vergipntr 
+           ,@pro_vergi 
+           ,@pro_masrafvergipntr 
+           ,@pro_masrafvergi 
+           ,@pro_opno 
+           ,@pro_aciklama 
+           ,@pro_aciklama2 
+           ,@pro_depono 
+           ,@pro_onaylayanKul_no 
+           ,@pro_vergisiz 
+           ,@pro_kapat 
+           ,@pro_promosyon_fl 
+           ,@pro_cari_sormerk 
+           ,@pro_stok_sormerk 
+           ,@pro_cari_grupno 
+           ,@pro_dovizcinsi 
+           ,@pro_dovizkuru 
+           ,@pro_altdovizkuru 
+           ,@pro_adresno 
+           ,@pro_teslimturu 
+           ,@pro_cagrilabilir_fl 
+           ,@pro_sipDbID 
+           ,@pro_sipRecID 
+           ,@pro_isk_mas_1 
+           ,@pro_isk_mas_2 
+           ,@pro_isk_mas_3 
+           ,@pro_isk_mas_4 
+           ,@pro_isk_mas_5 
+           ,@pro_isk_mas_6 
+           ,@pro_isk_mas_7 
+           ,@pro_isk_mas_8 
+           ,@pro_isk_mas_9 
+           ,@pro_isk_mas_10 
+           ,@pro_sat_isk_mas1 
+           ,@pro_sat_isk_mas2 
+           ,@pro_sat_isk_mas3 
+           ,@pro_sat_isk_mas4 
+           ,@pro_sat_isk_mas5 
+           ,@pro_sat_isk_mas6 
+           ,@pro_sat_isk_mas7 
+           ,@pro_sat_isk_mas8 
+           ,@pro_sat_isk_mas9 
+           ,@pro_sat_isk_mas10 
+           ,@pro_Exp_Imp_Kodu 
+           ,@pro_karoani 
+           ,@pro_durumu 
+           ,@pro_stalRecId_DBCno 
+           ,@pro_stalRecId_RECno 
+           ,@pro_planlananmiktar 
+           ,@pro_teklifRecId_DBCno 
+           ,@pro_teklifRecId_RECno 
+           ,@pro_parti_kodu 
+           ,@pro_lot_no 
+           ,@pro_projekodu 
+           ,@pro_fiyat_liste_no 
+           ,@pro_Otv_Pntr 
+           ,@pro_Otv_Vergi 
+           ,@pro_otvtutari 
+           ,@pro_OtvVergisiz_Fl 
+           ,@pro_paket_kod 
+           ,@pro_RezRecId_DBCno 
+           ,@pro_RezRecId_RECno 
+           ,@pro_harekettipi 
+           ,@pro_yetkili_recid_dbcno 
+           ,@pro_yetkili_recid_recno 
+           ,@pro_kapatmanedenkod 
+           ,@pro_gecerlilik_tarihi 
+           ,@pro_onodeme_evrak_tip 
+           ,@pro_onodeme_evrak_seri 
+           ,@pro_onodeme_evrak_sira 
+           ,@pro_rezervasyon_miktari 
+           ,@pro_rezerveden_teslim_edilen )
+
+		      UPDATE PROFORMA_SIPARISLER SET pro_RECid_RECno=pro_RECno WHERE pro_RECno<>pro_RECid_RECno
+
+
+go
+create proc [dbo].[prc_SIPARISLER_Insert]
+			@sip_RECno int
+		   ,@sip_RECid_DBCno smallint
+           ,@sip_RECid_RECno int
+           ,@sip_SpecRECno int
+           ,@sip_iptal bit
+           ,@sip_fileid smallint
+           ,@sip_hidden bit
+           ,@sip_kilitli bit
+           ,@sip_degisti bit
+           ,@sip_checksum int
+           ,@sip_create_user smallint
+           ,@sip_create_date datetime
+           ,@sip_lastup_user smallint
+           ,@sip_lastup_date datetime
+           ,@sip_special1 nvarchar(4)
+           ,@sip_special2 nvarchar(4)
+           ,@sip_special3 nvarchar(4)
+           ,@sip_firmano int
+           ,@sip_subeno int
+           ,@sip_tarih datetime
+           ,@sip_teslim_tarih datetime
+           ,@sip_tip tinyint
+           ,@sip_cins tinyint
+           ,@sip_evrakno_seri nvarchar(25)
+           ,@sip_evrakno_sira int
+           ,@sip_satirno int
+           ,@sip_belgeno nvarchar(25)
+           ,@sip_belge_tarih datetime
+           ,@sip_satici_kod nvarchar(25)
+           ,@sip_musteri_kod nvarchar(25)
+           ,@sip_stok_kod nvarchar(25)
+           ,@sip_b_fiyat float
+           ,@sip_miktar float
+           ,@sip_birim_pntr tinyint
+           ,@sip_teslim_miktar float
+           ,@sip_tutar float
+           ,@sip_iskonto_1 float
+           ,@sip_iskonto_2 float
+           ,@sip_iskonto_3 float
+           ,@sip_iskonto_4 float
+           ,@sip_iskonto_5 float
+           ,@sip_iskonto_6 float
+           ,@sip_masraf_1 float
+           ,@sip_masraf_2 float
+           ,@sip_masraf_3 float
+           ,@sip_masraf_4 float
+           ,@sip_vergi_pntr tinyint
+           ,@sip_vergi float
+           ,@sip_masvergi_pntr tinyint
+           ,@sip_masvergi float
+           ,@sip_opno int
+           ,@sip_aciklama nvarchar(50)
+           ,@sip_aciklama2 nvarchar(50)
+           ,@sip_depono int
+           ,@sip_OnaylayanKulNo smallint
+           ,@sip_vergisiz_fl bit
+           ,@sip_kapat_fl bit
+           ,@sip_promosyon_fl bit
+           ,@sip_cari_sormerk nvarchar(25)
+           ,@sip_stok_sormerk nvarchar(25)
+           ,@sip_cari_grupno tinyint
+           ,@sip_doviz_cinsi tinyint
+           ,@sip_doviz_kuru float
+           ,@sip_alt_doviz_kuru float
+           ,@sip_adresno int
+           ,@sip_teslimturu nvarchar(4)
+           ,@sip_cagrilabilir_fl bit
+           ,@sip_prosiprecDbId smallint
+           ,@sip_prosiprecrecI int
+           ,@sip_iskonto1 tinyint
+           ,@sip_iskonto2 tinyint
+           ,@sip_iskonto3 tinyint
+           ,@sip_iskonto4 tinyint
+           ,@sip_iskonto5 tinyint
+           ,@sip_iskonto6 tinyint
+           ,@sip_masraf1 tinyint
+           ,@sip_masraf2 tinyint
+           ,@sip_masraf3 tinyint
+           ,@sip_masraf4 tinyint
+           ,@sip_isk1 bit
+           ,@sip_isk2 bit
+           ,@sip_isk3 bit
+           ,@sip_isk4 bit
+           ,@sip_isk5 bit
+           ,@sip_isk6 bit
+           ,@sip_mas1 bit
+           ,@sip_mas2 bit
+           ,@sip_mas3 bit
+           ,@sip_mas4 bit
+           ,@sip_Exp_Imp_Kodu nvarchar(25)
+           ,@sip_kar_orani float
+           ,@sip_durumu tinyint
+           ,@sip_stalRecId_DBCno smallint
+           ,@sip_stalRecId_RECno int
+           ,@sip_planlananmiktar float
+           ,@sip_teklifRecId_DBCno smallint
+           ,@sip_teklifRecId_RECno int
+           ,@sip_parti_kodu nvarchar(25)
+           ,@sip_lot_no int
+           ,@sip_projekodu nvarchar(25)
+           ,@sip_fiyat_liste_no int
+           ,@sip_Otv_Pntr tinyint
+           ,@sip_Otv_Vergi float
+           ,@sip_otvtutari float
+           ,@sip_OtvVergisiz_Fl tinyint
+           ,@sip_paket_kod nvarchar(25)
+           ,@sip_RezRecId_DBCno smallint
+           ,@sip_RezRecId_RECno int
+           ,@sip_harekettipi tinyint
+           ,@sip_yetkili_recid_dbcno smallint
+           ,@sip_yetkili_recid_recno int
+           ,@sip_kapatmanedenkod nvarchar(25)
+           ,@sip_gecerlilik_tarihi datetime
+           ,@sip_onodeme_evrak_tip tinyint
+           ,@sip_onodeme_evrak_seri nvarchar(25) 
+           ,@sip_onodeme_evrak_sira int
+           ,@sip_rezervasyon_miktari float
+           ,@sip_rezerveden_teslim_edilen float
+as
+INSERT INTO [dbo].[SIPARISLER]
+           ([sip_RECid_DBCno]
+           ,[sip_RECid_RECno]
+           ,[sip_SpecRECno]
+           ,[sip_iptal]
+           ,[sip_fileid]
+           ,[sip_hidden]
+           ,[sip_kilitli]
+           ,[sip_degisti]
+           ,[sip_checksum]
+           ,[sip_create_user]
+           ,[sip_create_date]
+           ,[sip_lastup_user]
+           ,[sip_lastup_date]
+           ,[sip_special1]
+           ,[sip_special2]
+           ,[sip_special3]
+           ,[sip_firmano]
+           ,[sip_subeno]
+           ,[sip_tarih]
+           ,[sip_teslim_tarih]
+           ,[sip_tip]
+           ,[sip_cins]
+           ,[sip_evrakno_seri]
+           ,[sip_evrakno_sira]
+           ,[sip_satirno]
+           ,[sip_belgeno]
+           ,[sip_belge_tarih]
+           ,[sip_satici_kod]
+           ,[sip_musteri_kod]
+           ,[sip_stok_kod]
+           ,[sip_b_fiyat]
+           ,[sip_miktar]
+           ,[sip_birim_pntr]
+           ,[sip_teslim_miktar]
+           ,[sip_tutar]
+           ,[sip_iskonto_1]
+           ,[sip_iskonto_2]
+           ,[sip_iskonto_3]
+           ,[sip_iskonto_4]
+           ,[sip_iskonto_5]
+           ,[sip_iskonto_6]
+           ,[sip_masraf_1]
+           ,[sip_masraf_2]
+           ,[sip_masraf_3]
+           ,[sip_masraf_4]
+           ,[sip_vergi_pntr]
+           ,[sip_vergi]
+           ,[sip_masvergi_pntr]
+           ,[sip_masvergi]
+           ,[sip_opno]
+           ,[sip_aciklama]
+           ,[sip_aciklama2]
+           ,[sip_depono]
+           ,[sip_OnaylayanKulNo]
+           ,[sip_vergisiz_fl]
+           ,[sip_kapat_fl]
+           ,[sip_promosyon_fl]
+           ,[sip_cari_sormerk]
+           ,[sip_stok_sormerk]
+           ,[sip_cari_grupno]
+           ,[sip_doviz_cinsi]
+           ,[sip_doviz_kuru]
+           ,[sip_alt_doviz_kuru]
+           ,[sip_adresno]
+           ,[sip_teslimturu]
+           ,[sip_cagrilabilir_fl]
+           ,[sip_prosiprecDbId]
+           ,[sip_prosiprecrecI]
+           ,[sip_iskonto1]
+           ,[sip_iskonto2]
+           ,[sip_iskonto3]
+           ,[sip_iskonto4]
+           ,[sip_iskonto5]
+           ,[sip_iskonto6]
+           ,[sip_masraf1]
+           ,[sip_masraf2]
+           ,[sip_masraf3]
+           ,[sip_masraf4]
+           ,[sip_isk1]
+           ,[sip_isk2]
+           ,[sip_isk3]
+           ,[sip_isk4]
+           ,[sip_isk5]
+           ,[sip_isk6]
+           ,[sip_mas1]
+           ,[sip_mas2]
+           ,[sip_mas3]
+           ,[sip_mas4]
+           ,[sip_Exp_Imp_Kodu]
+           ,[sip_kar_orani]
+           ,[sip_durumu]
+           ,[sip_stalRecId_DBCno]
+           ,[sip_stalRecId_RECno]
+           ,[sip_planlananmiktar]
+           ,[sip_teklifRecId_DBCno]
+           ,[sip_teklifRecId_RECno]
+           ,[sip_parti_kodu]
+           ,[sip_lot_no]
+           ,[sip_projekodu]
+           ,[sip_fiyat_liste_no]
+           ,[sip_Otv_Pntr]
+           ,[sip_Otv_Vergi]
+           ,[sip_otvtutari]
+           ,[sip_OtvVergisiz_Fl]
+           ,[sip_paket_kod]
+           ,[sip_RezRecId_DBCno]
+           ,[sip_RezRecId_RECno]
+           ,[sip_harekettipi]
+           ,[sip_yetkili_recid_dbcno]
+           ,[sip_yetkili_recid_recno]
+           ,[sip_kapatmanedenkod]
+           ,[sip_gecerlilik_tarihi]
+           ,[sip_onodeme_evrak_tip]
+           ,[sip_onodeme_evrak_seri]
+           ,[sip_onodeme_evrak_sira]
+           ,[sip_rezervasyon_miktari]
+           ,[sip_rezerveden_teslim_edilen])
+     VALUES
+           (@sip_RECid_DBCno 
+           ,@sip_RECid_RECno 
+           ,@sip_SpecRECno 
+           ,@sip_iptal 
+           ,@sip_fileid 
+           ,@sip_hidden 
+           ,@sip_kilitli 
+           ,@sip_degisti 
+           ,@sip_checksum 
+           ,@sip_create_user 
+           ,@sip_create_date 
+           ,@sip_lastup_user 
+           ,@sip_lastup_date 
+           ,@sip_special1 
+           ,@sip_special2 
+           ,@sip_special3 
+           ,@sip_firmano 
+           ,@sip_subeno 
+           ,@sip_tarih 
+           ,@sip_teslim_tarih 
+           ,@sip_tip 
+           ,@sip_cins 
+           ,@sip_evrakno_seri
+           ,@sip_evrakno_sira 
+           ,@sip_satirno 
+           ,@sip_belgeno 
+           ,@sip_belge_tarih 
+           ,@sip_satici_kod 
+           ,@sip_musteri_kod 
+           ,@sip_stok_kod 
+           ,@sip_b_fiyat 
+           ,@sip_miktar 
+           ,@sip_birim_pntr 
+           ,@sip_teslim_miktar 
+           ,@sip_tutar 
+           ,@sip_iskonto_1 
+           ,@sip_iskonto_2 
+           ,@sip_iskonto_3 
+           ,@sip_iskonto_4 
+           ,@sip_iskonto_5 
+           ,@sip_iskonto_6 
+           ,@sip_masraf_1 
+           ,@sip_masraf_2 
+           ,@sip_masraf_3 
+           ,@sip_masraf_4 
+           ,@sip_vergi_pntr 
+           ,@sip_vergi 
+           ,@sip_masvergi_pntr 
+           ,@sip_masvergi 
+           ,@sip_opno 
+           ,@sip_aciklama 
+           ,@sip_aciklama2 
+           ,@sip_depono 
+           ,@sip_OnaylayanKulNo 
+           ,@sip_vergisiz_fl 
+           ,@sip_kapat_fl 
+           ,@sip_promosyon_fl 
+           ,@sip_cari_sormerk 
+           ,@sip_stok_sormerk 
+           ,@sip_cari_grupno 
+           ,@sip_doviz_cinsi 
+           ,@sip_doviz_kuru 
+           ,@sip_alt_doviz_kuru 
+           ,@sip_adresno 
+           ,@sip_teslimturu 
+           ,@sip_cagrilabilir_fl 
+           ,@sip_prosiprecDbId 
+           ,@sip_prosiprecrecI 
+           ,@sip_iskonto1 
+           ,@sip_iskonto2 
+           ,@sip_iskonto3 
+           ,@sip_iskonto4 
+           ,@sip_iskonto5 
+           ,@sip_iskonto6 
+           ,@sip_masraf1 
+           ,@sip_masraf2 
+           ,@sip_masraf3 
+           ,@sip_masraf4 
+           ,@sip_isk1 
+           ,@sip_isk2 
+           ,@sip_isk3 
+           ,@sip_isk4 
+           ,@sip_isk5 
+           ,@sip_isk6 
+           ,@sip_mas1 
+           ,@sip_mas2 
+           ,@sip_mas3 
+           ,@sip_mas4 
+           ,@sip_Exp_Imp_Kodu 
+           ,@sip_kar_orani 
+           ,@sip_durumu 
+           ,@sip_stalRecId_DBCno 
+           ,@sip_stalRecId_RECno 
+           ,@sip_planlananmiktar 
+           ,@sip_teklifRecId_DBCno 
+           ,@sip_teklifRecId_RECno 
+           ,@sip_parti_kodu 
+           ,@sip_lot_no 
+           ,@sip_projekodu 
+           ,@sip_fiyat_liste_no 
+           ,@sip_Otv_Pntr 
+           ,@sip_Otv_Vergi 
+           ,@sip_otvtutari 
+           ,@sip_OtvVergisiz_Fl 
+           ,@sip_paket_kod 
+           ,@sip_RezRecId_DBCno 
+           ,@sip_RezRecId_RECno 
+           ,@sip_harekettipi 
+           ,@sip_yetkili_recid_dbcno 
+           ,@sip_yetkili_recid_recno 
+           ,@sip_kapatmanedenkod 
+           ,@sip_gecerlilik_tarihi 
+           ,@sip_onodeme_evrak_tip 
+           ,@sip_onodeme_evrak_seri 
+           ,@sip_onodeme_evrak_sira 
+           ,@sip_rezervasyon_miktari 
+           ,@sip_rezerveden_teslim_edilen)
+
+
+		   UPDATE SIPARISLER SET sip_RECid_RECno=sip_RECno WHERE sip_RECno<>sip_RECid_RECno
+
+
+Go
+
+
+Create proc [dbo].[prc_ILISKILER_Insert]
+			@il_RECno int
+			,@il_RECid_DBCno smallint
+           ,@il_RECid_RECno int
+           ,@il_SpecRECno int
+           ,@il_iptal bit
+           ,@il_fileid smallint
+           ,@il_hidden bit
+           ,@il_kilitli bit
+           ,@il_degisti bit
+           ,@il_checksum int
+           ,@il_create_user smallint
+           ,@il_create_date datetime
+           ,@il_lastup_user smallint
+           ,@il_lastup_date datetime
+           ,@il_special1 nvarchar(4)
+           ,@il_special2 nvarchar(4)
+           ,@il_special3 nvarchar(4)
+           ,@il_baszaman datetime
+           ,@il_bitzaman datetime
+           ,@il_sorumlu_personel nvarchar(25)
+           ,@il_iliski_tipi tinyint
+           ,@il_carikodu nvarchar(25)
+           ,@il_adres_no int
+           ,@il_yetkiliRecID_DBCno smallint
+           ,@il_yetkiliRecID_RECno int
+           ,@il_yetkiliadi nvarchar(50)
+           ,@il_yer nvarchar(80)=''
+           ,@il_konu nvarchar(80)=''
+           ,@il_refno nvarchar(25)=''
+           ,@il_projekodu nvarchar(25)=''
+           ,@il_oncelik tinyint
+           ,@il_cari_tipi tinyint
+as
+INSERT INTO [dbo].[ILISKILER]
+           ([il_RECid_DBCno]
+           ,[il_RECid_RECno]
+           ,[il_SpecRECno]
+           ,[il_iptal]
+           ,[il_fileid]
+           ,[il_hidden]
+           ,[il_kilitli]
+           ,[il_degisti]
+           ,[il_checksum]
+           ,[il_create_user]
+           ,[il_create_date]
+           ,[il_lastup_user]
+           ,[il_lastup_date]
+           ,[il_special1]
+           ,[il_special2]
+           ,[il_special3]
+           ,[il_baszaman]
+           ,[il_bitzaman]
+           ,[il_sorumlu_personel]
+           ,[il_iliski_tipi]
+           ,[il_carikodu]
+           ,[il_adres_no]
+           ,[il_yetkiliRecID_DBCno]
+           ,[il_yetkiliRecID_RECno]
+           ,[il_yetkiliadi]
+           ,[il_yer]
+           ,[il_konu]
+           ,[il_refno]
+           ,[il_projekodu]
+           ,[il_oncelik]
+           ,[il_cari_tipi])
+     VALUES
+	  (		@il_RECid_DBCno 
+           ,@il_RECid_RECno 
+           ,@il_SpecRECno 
+           ,@il_iptal 
+           ,@il_fileid 
+           ,@il_hidden 
+           ,@il_kilitli 
+           ,@il_degisti 
+           ,@il_checksum 
+           ,@il_create_user 
+           ,@il_create_date 
+           ,@il_lastup_user 
+           ,@il_lastup_date 
+           ,@il_special1 
+           ,@il_special2 
+           ,@il_special3 
+           ,@il_baszaman 
+           ,@il_bitzaman 
+           ,@il_sorumlu_personel 
+           ,@il_iliski_tipi 
+           ,@il_carikodu 
+           ,@il_adres_no 
+           ,@il_yetkiliRecID_DBCno 
+           ,@il_yetkiliRecID_RECno 
+           ,@il_yetkiliadi 
+           ,@il_yer 
+           ,@il_konu
+           ,@il_refno 
+           ,@il_projekodu 
+           ,@il_oncelik 
+           ,@il_cari_tipi )
+          
+		     UPDATE [ILISKILER] SET il_RECid_RECno=il_RECno WHERE il_RECno<>il_RECid_RECno
+
+
+go
+
+Create proc prc_mye_TextData_Insert
+			@TableID int
+           ,@RecID_DBCno int
+           ,@RecID_RECno int
+           ,@Data nvarchar(MAX)
+as
+
+INSERT INTO [dbo].[mye_TextData]
+           ([TableID]
+           ,[RecID_DBCno]
+           ,[RecID_RECno]
+           ,[Data])
+     VALUES
+           (@TableID
+           ,@RecID_DBCno
+           ,@RecID_RECno 
+           ,@Data)
+
+GO
+create proc [dbo].[prc_CARI_HESAP_YETKILILERI_Insert]
+		    @mye_RECno int
+			,@mye_RECid_DBCno smallint
+           ,@mye_RECid_RECno int
+           ,@mye_SpecRECno int
+           ,@mye_iptal bit
+           ,@mye_fileid smallint
+           ,@mye_hidden bit
+           ,@mye_kilitli bit
+           ,@mye_degisti bit
+           ,@mye_checksum int
+           ,@mye_create_user smallint
+           ,@mye_create_date datetime
+           ,@mye_lastup_user smallint
+           ,@mye_lastup_date datetime
+           ,@mye_special1 nvarchar(4)
+           ,@mye_special2 nvarchar(4)
+           ,@mye_special3 nvarchar(4)
+           ,@mye_cari_kod nvarchar(25)
+           ,@mye_adres_no int
+           ,@mye_isim nvarchar(30)
+           ,@mye_soyisim nvarchar(30)
+           ,@mye_dogum_tarihi datetime
+           ,@mye_evlilik_tarihi datetime
+           ,@mye_es_isim nvarchar(30)
+           ,@mye_es_dogum_tarihi datetime
+           ,@mye_unvan tinyint
+           ,@mye_hitap tinyint
+           ,@mye_hisse tinyint
+           ,@mye_tahsil tinyint
+           ,@mye_dahili_telno nvarchar(5)
+           ,@mye_email_adres nvarchar(50)
+           ,@mye_cep_telno nvarchar(17)
+           ,@mye_tc_kimlikno nvarchar(20)
+           ,@mye_vergi_dairesi nvarchar(20)
+           ,@mye_vergi_kimlikno nvarchar(20)
+           ,@mye_dogum_yeri nvarchar(30)
+           ,@mye_ev_cadde nvarchar(50)
+           ,@mye_ev_mahalle nvarchar(50)
+           ,@mye_ev_sokak nvarchar(50)
+           ,@mye_ev_Semt nvarchar(25)
+           ,@mye_ev_Apt_No nvarchar(10)
+           ,@mye_ev_Daire_No nvarchar(10)
+           ,@mye_ev_posta_kodu nvarchar(8)
+           ,@mye_ev_ilce nvarchar(15)
+           ,@mye_ev_il nvarchar(15)
+           ,@mye_ev_ulke nvarchar(15)
+           ,@mye_ev_adres_kodu nvarchar(10)
+           ,@mye_is_telno nvarchar(17)
+           ,@mye_ev_telno nvarchar(17)
+           ,@mye_KEP_adresi nvarchar(80)
+           ,@mye_mutabakat_yetkilisi_fl bit
+
+as
+
+
+INSERT INTO [dbo].[CARI_HESAP_YETKILILERI]
+           ([mye_RECid_DBCno]
+           ,[mye_RECid_RECno]
+           ,[mye_SpecRECno]
+           ,[mye_iptal]
+           ,[mye_fileid]
+           ,[mye_hidden]
+           ,[mye_kilitli]
+           ,[mye_degisti]
+           ,[mye_checksum]
+           ,[mye_create_user]
+           ,[mye_create_date]
+           ,[mye_lastup_user]
+           ,[mye_lastup_date]
+           ,[mye_special1]
+           ,[mye_special2]
+           ,[mye_special3]
+           ,[mye_cari_kod]
+           ,[mye_adres_no]
+           ,[mye_isim]
+           ,[mye_soyisim]
+           ,[mye_dogum_tarihi]
+           ,[mye_evlilik_tarihi]
+           ,[mye_es_isim]
+           ,[mye_es_dogum_tarihi]
+           ,[mye_unvan]
+           ,[mye_hitap]
+           ,[mye_hisse]
+           ,[mye_tahsil]
+           ,[mye_dahili_telno]
+           ,[mye_email_adres]
+           ,[mye_cep_telno]
+           ,[mye_tc_kimlikno]
+           ,[mye_vergi_dairesi]
+           ,[mye_vergi_kimlikno]
+           ,[mye_dogum_yeri]
+           ,[mye_ev_cadde]
+           ,[mye_ev_mahalle]
+           ,[mye_ev_sokak]
+           ,[mye_ev_Semt]
+           ,[mye_ev_Apt_No]
+           ,[mye_ev_Daire_No]
+           ,[mye_ev_posta_kodu]
+           ,[mye_ev_ilce]
+           ,[mye_ev_il]
+           ,[mye_ev_ulke]
+           ,[mye_ev_adres_kodu]
+           ,[mye_is_telno]
+           ,[mye_ev_telno]
+           ,[mye_KEP_adresi]
+           ,[mye_mutabakat_yetkilisi_fl])
+     VALUES
+    (
+			    @mye_RECid_DBCno 
+           ,@mye_RECid_RECno 
+           ,@mye_SpecRECno 
+           ,@mye_iptal 
+           ,@mye_fileid 
+           ,@mye_hidden 
+           ,@mye_kilitli 
+           ,@mye_degisti 
+           ,@mye_checksum 
+           ,@mye_create_user 
+           ,@mye_create_date 
+           ,@mye_lastup_user 
+           ,@mye_lastup_date 
+           ,@mye_special1 
+           ,@mye_special2 
+           ,@mye_special3 
+           ,@mye_cari_kod 
+           ,@mye_adres_no 
+           ,@mye_isim 
+           ,@mye_soyisim 
+           ,@mye_dogum_tarihi 
+           ,@mye_evlilik_tarihi 
+           ,@mye_es_isim 
+           ,@mye_es_dogum_tarihi 
+           ,@mye_unvan 
+           ,@mye_hitap 
+           ,@mye_hisse 
+           ,@mye_tahsil 
+           ,@mye_dahili_telno 
+           ,@mye_email_adres 
+           ,@mye_cep_telno 
+           ,@mye_tc_kimlikno
+           ,@mye_vergi_dairesi
+           ,@mye_vergi_kimlikno
+           ,@mye_dogum_yeri 
+           ,@mye_ev_cadde 
+           ,@mye_ev_mahalle 
+           ,@mye_ev_sokak 
+           ,@mye_ev_Semt 
+           ,@mye_ev_Apt_No 
+           ,@mye_ev_Daire_No 
+           ,@mye_ev_posta_kodu 
+           ,@mye_ev_ilce 
+           ,@mye_ev_il 
+           ,@mye_ev_ulke 
+           ,@mye_ev_adres_kodu 
+           ,@mye_is_telno 
+           ,@mye_ev_telno 
+           ,@mye_KEP_adresi
+           ,@mye_mutabakat_yetkilisi_fl 
+		   )
+
+		   	     UPDATE CARI_HESAP_YETKILILERI SET mye_RECid_RECno=mye_RECno WHERE mye_RECno<>mye_RECid_RECno
+
+
+go
+
+
+create proc prc_CariArama
+@CariKod nvarchar(50)
+as
+
+select 
+		 cari_kod as CariKod
+ 		,cari_unvan1 as CariUnvan
+		,cari_vdaire_adi as VergiDairesi
+		,cari_vdaire_no as VergiNumarasý
+		,cari_EMail as Email
+		,cari_wwwadresi as WebAdresi
+		,cari_efatura_baslangic_tarihi as eFaturaBaslangicTarihi
+		,cari_efatura_fl as eFaturaDurum,
+		dbo.fn_CariHesapAnaDovizBakiye('',0,cari_kod,'','',NULL,NULL,NULL,0) as Bakiye,
+		ca.adr_cadde as Adres1,
+		ca.adr_sokak as Adres2,
+		ca.adr_posta_kodu as PostaKodu,
+		ca.adr_il as Il,
+		ca.adr_ilce as Ilce,
+		ca.adr_tel_bolge_kodu as BolgeKod,
+		ca.adr_tel_no1 as Tel1,
+		ca.adr_tel_no2 as Tel2,
+		ca.adr_tel_faxno as Fax
+		
+
+ from CARI_HESAPLAR c left join CARI_HESAP_ADRESLERI ca on c.cari_kod=ca.adr_cari_kod where  c.cari_kod like '%'+@CariKod+'%' and ca.adr_adres_no=1
+

@@ -1,0 +1,235 @@
+﻿@model List<MikroCrm.UI.ViewModel.UserModel.UserListViewModel>
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="page-content-wrap">
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        Kullanicilar
+                    </div>
+                    <ul class="panel-controls">
+                        <li><a href="/User/AddUser" class="btn btn-default btn-sm"><span class="fa fa-plus"></span></a></li>
+                    </ul>
+                </div>
+                <div class="panel-body panel-body-table">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Kullanici Ad</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                    <th>Giriş Tarihi</th>
+                                    <th>Durum</th>
+                                    <th class="text-center">
+                                        <span class="fa fa-cog"></span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Count > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <tr id="trow_@item.Id">
+                                            <td>@item.UserName</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.RoleName</td>
+                                            <td>@String.Format("{0:dd/MMMM/yyyy}", item.DateOfEntry)</td>
+                                            <td>@item.IsActive</td>
+                                            <td class="text-center">
+                                                <a href="/User/EditUser/@item.Id" class="btn btn-default btn-rounded btn-sm">
+                                                    <span class="fa fa-edit"></span>
+                                                </a>
+                                                <a class="btn btn-default btn-rounded btn-sm" href="javascript:generalsetting('@item.Id')"><span class="glyphicon glyphicon-cog"></span></a>
+                                                
+                                                <a class="btn btn-default btn-rounded btn-sm" href="javascript:database_statu('@item.Id')"><span class="fa fa-bolt"></span></a>
+                                                <a class="btn btn-danger btn-rounded btn-sm" href="javascript:delete_row('@item.Id')"><span class="fa fa-times"></span></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+
+    function delete_row(id) {
+        var row = "trow_"+ id;
+        var box = $("#mb-remove-row");
+        box.addClass("open");
+
+        box.find(".mb-control-yes").on("click", function () {
+            box.removeClass("open");
+            $.ajax({
+                type: "Post",
+                url: "/User/DeleteUser",
+                data: { 'Id': id },
+                dataTpe: "Json",
+                success: function (data) {
+                    if (data == "1") {
+
+                        $("#" + row).hide("slow", function () {
+                            $(this).remove();
+                        });
+
+                    }
+                    else {
+                        //    noty({ text: 'Silme işlemi başarısız !', layout: 'topRight', type: 'error' });
+                    }
+                }
+
+            });
+          
+
+        });
+
+    }
+
+    </script>
+
+
+<script>
+    function database_statu(id)
+    {
+        console.log(id);
+        if (id>0) {
+            $.ajax({
+                type: "Get",
+                url: "/user/DataBaseStatu",
+                data: { 'id': id },
+                dataType: "json",
+                success: function (data) {
+                    if (data == "1") {
+                        noty({ text: 'Bağlantı başarılı', layout: 'topRight', type: 'success' });
+                    }
+                    else {
+
+                        noty({ text: 'Bağlantı başarısız !', layout: 'topRight', type: 'error' });
+                    }
+                }
+            });
+        }
+
+
+    }
+
+</script>
+}
+<div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span> Remove <strong>Data</strong> ?</div>
+            <div class="mb-content">
+                <p>Are you sure you want to remove this row?</p>
+                <p>Press Yes if you sure.</p>
+            </div>
+            <div class="mb-footer">
+                <div class="pull-right">
+                    <button class="btn btn-success btn-lg mb-control-yes">Yes</button>
+                    <button class="btn btn-default btn-lg mb-control-close">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function generalsetting(id) {
+        console.log(id);
+        if(id>0)
+        {
+            $.ajax({
+                type: "Post",
+                url: "/User/GetGeneralSetting",
+                data: { 'UserId': id },
+                dataType: "json",
+                success: function (data) {
+                    console.log(data.DocSeri);
+                    $("#UserId").val(data.UserId);
+                    $("#DocSeri").val(data.DocSeri);
+                    $("#generalsettingPopup").modal("show");
+                }
+
+            });
+          
+        }
+    }
+    function generalsubmit() {
+
+        var docseri = $("#DocSeri").val();
+        var userId = $("#UserId").val();
+        var data = {
+            'docseri': docseri,
+            'userId': userId
+        };
+        console.log(data);
+        console.log(data.docseri);
+        console.log(data.userId);
+        $.ajax({
+
+            type: "Post",
+            url: "/User/GeneralSettingAdd",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                if(data=="1")
+                {
+                    $("#generalsettingPopup").modal("hide");
+                }
+                else {
+                    noty({ text: 'Silme işlemi başarısız !', layout: 'topRight', type: 'error' });
+                }
+            }
+
+        })
+
+    }
+</script>
+
+<!-- Genel Ayarlar Popup -->
+<div class="modal fade" id="generalsettingPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Genel Ayarlar</h4>
+            </div>
+            <div class="modal-body">
+               <div class="form-horizontal">
+                   <input type="hidden" id="UserId" name="UserId" value="" />
+                   <div class="form-group">
+                       <label class="col-md-3 control-label">Evrak Seri</label>
+                       <div class="col-md-9">
+                           <div class="input-group">
+                               <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                               <input type="text" required class="form-control" name="DocSeri"  id="DocSeri" value="" />
+                           </div>
+                       </div>
+                   </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                <button type="button" onclick="generalsubmit()" class="btn btn-primary">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,140 @@
+﻿@model MikroCrm.UI.ViewModel.UserModel.UserViewModel
+<div class="page-content-wrap">
+    <div class="row">
+
+        <div class="col-md-12">
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.SettingData.Id)
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Kullanici Ekle
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <p><b>Kullanıcı Bilgileri</b></p>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Kullanici Ad</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.UserName)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Email</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.Email)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Password</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+                                                @Html.TextBoxFor(x => x.Password, new { type = "password", @class = "form-control" })
+
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.Password)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Role</label>
+
+                                        <div class="col-md-9">
+                                            @Html.DropDownListFor(x => x.RoleId, Model.RoleList, "Seçiniz", new { @class = "form-control" })
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.RoleId)</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <p><b>Server Bilgileri</b></p>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Server</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                @Html.TextBoxFor(x => x.SettingData.Server, new { @class = "form-control", @placeholder = "Server" })
+
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.SettingData.Server)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">DataBase</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                @Html.TextBoxFor(x => x.SettingData.DataBase, new { @class = "form-control", @placeholder = "MikroDB_V15_" })
+
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.SettingData.DataBase)</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">User Name</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                @Html.TextBoxFor(x => x.SettingData.UserName, new { @class = "form-control", @placeholder = "sa" })
+
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.SettingData.UserName)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Password</label>
+
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+                                                @Html.TextBoxFor(x => x.SettingData.Password, new { type = "password", @class = "form-control", @placeholder = "123" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.SettingData.Password)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+
+                            <button type="submit" class="btn btn-primary pull-right">Ekle</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            }
+        </div>
+
+    </div>
+</div>

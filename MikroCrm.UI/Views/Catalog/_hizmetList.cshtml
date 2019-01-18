@@ -1,0 +1,54 @@
+﻿@model MikroCrm.UI.ViewModel.CatalogModel.Hizmet.HizmetSearchViewModel
+@using PagedList.Mvc;
+@using PagedList;
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Hizmet Kod</th>
+            <th>Hizmet Ad</th>
+            <th class="text-center">İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.HizmetList != null)
+        {
+            if (Model.HizmetList.Count > 0)
+            {
+                foreach (var item in Model.HizmetList)
+                {
+                    <tr>
+                        <td>
+                            <label id="hizmetkod_@item.Id" data-id="@item.HizmetKod">
+                                @item.HizmetKod
+                            </label>
+                        </td>
+                        <td>
+                            <label id="hizmetad_@item.Id" data-id="@item.HizmetAd">
+                                @item.HizmetAd
+                            </label>
+                        </td>
+                        <td class="text-center">
+                            <button onclick="hizmetselect(@item.Id)" class="btn btn-default"><span class="glyphicon glyphicon-ok-sign"></span></button>
+                        </td>
+                    </tr>
+                }
+
+            }
+        }
+
+
+    </tbody>
+</table>
+
+<div class="pull-right" style="padding-right:5px">
+    @Html.PagedListPager(Model.HizmetList, page => Url.Action("HizmetList", new RouteValueDictionary
+{
+    {"Page",page},
+    {"HizmetKod",Model.HizmetKod},
+    {"HizmetAd",Model.HizmetAd}
+}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "cataloghizmetlist" }))
+
+
+</div>
+

@@ -1,0 +1,224 @@
+﻿@model MikroCrm.UI.ViewModel.OrderModel.OrderViewModel
+@{
+    ViewBag.Title = "AddOrder";
+}
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-12">
+            @using (Ajax.BeginForm("AddOrder", "Order", FormMethod.Post, new AjaxOptions { OnSuccess = "orderOnSuccess", OnBegin = "showPage()", OnComplete = "offPage()" }))
+            {
+                <div class="form-horizontal">
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <div class="panel-title">Siparis Ekle</div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Cari Kod</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(x => x.CariKod, new { @class = "form-control" })
+                                                <span onclick="customerSelect()" class="input-group-addon"><span class="fa fa-plus-square"></span></span>
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.CariKod)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Cari Unvan</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                @Html.TextBoxFor(x => x.CariUnvan, new { @class = "form-control" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.CariUnvan)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Tarih</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                @Html.TextBoxFor(x => x.Tarih, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-6 control-label">
+                                        </label>
+                                        <div class="col-md-6">
+
+                                            <a href="javascript:stockSelect()" class="pull-right btn btn-success"><i class="fa fa-plus"> Stok ekle</i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-body panel-body-table">
+
+                            <div class="table-responsive">
+                                <div id="baskerorderlist">
+                                    @Html.Partial("_basketorderlist", Model)
+                                    <span class="help-block">@Html.ValidationMessageFor(x => Model.OrderBasketList)</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="panel-footer">
+                            <button type="submit" class="pull-right btn btn-primary">Kaydet</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            }
+        </div>
+
+    </div>
+
+</div>
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+}
+<script>
+    function changePrice(id)
+    {
+        var quantity = $("#quantity_"+id).val();
+        var stokkod = $("#quantity_" + id).attr("data-id");
+        $("#quantity_" + id).val(quantity);
+        if(quantity>0)
+        {
+            $.ajax({
+                type: "Post",
+                url: "/Order/AddBasketOrder",
+                data: { "stokkod": stokkod, "miktar": quantity },
+                dataType: "Json",
+                success: function (data) {
+                    if (data == "1") {
+                        GetBasketOrderList();
+                    }
+                }
+            })
+        }
+
+
+    }
+</script>
+<script>
+    function orderOnSuccess(result) {
+        if (result == "1") {
+            window.location.href = "/Order/List";
+        }
+    }
+</script>
+<script>
+    function customerSelect() {
+        $('#customerPopup').modal('show');
+    }
+    function stockSelect() {
+        $('#stockPopup').modal('show');
+    }
+</script>
+<script>
+    function customerselect(id) {
+
+        console.log(id);
+
+        if (id > 0) {
+            var carikod = $("#carikod_" + id).attr("data-id");
+
+            var cariuncan = $("#cariunvan_" + id).attr("data-id");
+            console.log(carikod);
+            console.log(cariuncan);
+            if (carikod.length > 0) {
+                $("#CariKod").val(carikod);
+
+                $("#CariUnvan").val(cariuncan);
+                $('#customerPopup').modal('hide');
+            }
+        }
+    }
+
+    function stockselect(id) {
+
+        console.log(id);
+        showPage();
+        if (id > 0) {
+            var stokod = $("#stokkod_" + id).attr("data-id");
+
+            var stokad = $("#stokad_" + id).attr("data-id");
+            console.log(stokod);
+            console.log(stokad);
+            if (stokod.length > 0) {
+
+                AddBasketOrder(stokod);
+
+
+                $('#stockPopup').modal('hide');
+
+            }
+        }
+        offPage();
+    }
+
+    function AddBasketOrder(stokkod) {
+
+        $.ajax({
+            type: "Post",
+            url: "/Order/AddBasketOrder",
+            data: { "stokkod": stokkod,"miktar":"1" },
+            dataType: "Json",
+            success: function (data) {
+                if (data == "1") {
+                    GetBasketOrderList();
+                }
+            }
+        })
+
+    }
+
+    function GetBasketOrderList() {
+
+        $.ajax({
+            type: "Post",
+            url: "/Order/GetOrderBasketList",
+            dataType: "html",
+            success: function (data) {
+                $("#baskerorderlist").html(data);
+            }
+        })
+
+    }
+</script>
+<script>
+    function showPage() {
+        console.log("show");
+        document.getElementById("loader").style.display = "block";
+
+    }
+    function offPage() {
+        console.log("off");
+        document.getElementById("loader").style.display = "none";
+
+    }
+</script>
+
+@Html.Action("CustomerList", "Catalog")
+@Html.Action("StockList", "Catalog")

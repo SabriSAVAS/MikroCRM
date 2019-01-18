@@ -1,0 +1,132 @@
+﻿@model MikroCrm.UI.ViewModel.ProformaOrderModel.ProformaOrderSearchViewModel
+@using PagedList;
+@using PagedList.Mvc;
+
+@helper statu(string value)
+    {
+if (value == "Kapalı")
+{
+        <span class="label label-success label-form">Kapalı</span>
+}
+else
+{
+        <span class="label label-warning label-form">Açık</span>
+}
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Evrak Seri</th>          
+            <th>Evrak Tarih</th>      
+            <th>Cari Kod</th>
+            <th>Cari Unvan</th>
+            <th class="text-center">Teknisyen Ad</th>
+            <th>Acıklama</th>
+            <th>Acıklam 2</th>
+            <th>Durum</th>
+            <th class="text-center"><span class="glyphicon glyphicon-cog"></span> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.OrderList.Count > 0)
+        {
+            foreach (var item in Model.OrderList)
+            {
+                <tr id="row_@item.Id">
+                    <td>@item.EvrakSeri</td>
+                    <td>@string.Format("{0:dd/MMMM/yyyy}", item.Tarih)</td>             
+                    <td>@item.MusteriKod</td>
+                    <td>@item.MusteriUnvan</td>
+                    <td class="text-center">@item.SaticiAd</td>
+                    <td>@item.Aciklama</td>
+                    <td>@item.Aciklama2</td>
+                    @*<td>@item.Durum</td>*@
+                    <td>@Html.Raw(statu(item.Durum))</td>
+                    <td class="text-center">
+                    <a href="javascript:OrderDeleteRow(@item.Id)" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
+                    <a href="/ProformaOrder/PrintService/@item.Id" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i></a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+
+</table>
+<hr />
+<div class="pull-right" style="padding-right:5px">
+    @Html.PagedListPager(Model.OrderList, page => Url.Action("List", new RouteValueDictionary
+{
+    {"Page",page},
+    {"CariKod",Model.CariKod},
+    {"startDate",Model.startDate},
+    {"TekniksyenAd",Model.TekniksyenAd },
+    {"Durum",Model.Durum },
+    {"endDate",Model.endDate}
+}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "proformaorderList", OnBegin = "showPage()", OnComplete = "offPage()" }))
+
+
+</div>
+
+<script>
+
+    function OrderDeleteRow(row) {
+        console.log(row);
+       
+        if (row > 0) {
+            
+            var box = $("#proformaorder-mb-remove-row");
+            box.addClass("open");
+
+            box.find(".mb-control-yes").on("click", function () {
+                box.removeClass("open");
+                $.ajax({
+                    type: "Post",
+                    url: "/ProformaOrder/DeleteOrder",
+                    data: { 'Id': row },
+                    dataTpe: "Json",
+                    success: function (data) {
+                        if (data == "1") {
+
+                            $("#row_" + row).hide("slow", function () {
+
+                                $("#row_" + row).remove();
+
+
+                            });
+                           
+                        }
+                        else {
+                        //    noty({ text: 'Silme işlemi başarısız !', layout: 'topRight', type: 'error' });
+                        }
+                    }
+
+                });
+               
+            });
+
+        }
+
+    }
+
+</script>
+
+
+<div class="message-box animated fadeIn" data-sound="alert" id="proformaorder-mb-remove-row">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span> Veriyi <strong>Sil</strong> ?</div>
+            <div class="mb-content">
+                <p>Bu satırı silmek istediğinizden eminmisiniz?</p>
+                <p>Eminsen Evet'e basın.</p>
+            </div>
+            <div class="mb-footer">
+                <div class="pull-right">
+                    <a href="javascript:void(0)" class="btn btn-success btn-lg mb-control-yes">Evet</a>
+                    <a href="javascript:void(0)" class="btn btn-default btn-lg mb-control-close">Hayır</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

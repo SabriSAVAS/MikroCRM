@@ -1,0 +1,62 @@
+﻿@model MikroCrm.UI.ViewModel.ReportModel.Customer.ReportCustomerSearchViewModel
+@using PagedList;
+@using PagedList.Mvc;
+
+<table class="table table-bordered table-striped table-actions">
+    <thead>
+        <tr>
+            <th>Evrak Seri</th>
+            <th>Evrak No</th>
+            <th>Tarih</th>
+            <th>EvrakTip</th>
+            <th>EvrakCinsi</th>
+            <th>VadeTarih</th>
+            <th>BA</th>
+            <th>Borc</th>
+            <th>Alacak</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ReportCustomerList != null)
+        {
+            if (Model.ReportCustomerList.Count > 0)
+            {
+                foreach (var item in Model.ReportCustomerList)
+                {
+                    <tr id="row_@item.Id">
+                        <td>@item.EvrakSeri</td>
+                        <td>@item.EvrakSira</td>
+                        <td>@string.Format("{0:dd/MMMM/yyyy}", item.Tarih)</td>
+                        <td>@item.EvrakTip</td>
+                        <td>@item.EvrakCinsi</td>
+                        <td>@string.Format("{0:dd/MMMM/yyyy}", item.VadeTarih)</td>
+                        <td>@item.BA</td>
+                        <td>@string.Format("{0:C}", item.Borc)</td>
+                        <td>@string.Format("{0:C}", item.Alacak)</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+
+</table>
+<hr />
+@if (Model.ReportCustomerList != null)
+{
+    <div class="pull-right" style="padding-right:5px">
+        @Html.PagedListPager(Model.ReportCustomerList, page => Url.Action("Customer", new RouteValueDictionary
+{
+    {"Page",page},
+    {"CariKod",Model.CariKod},
+    {"startDate",Model.startDate},
+    {"endDate",Model.endDate}
+}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions {UpdateTargetId = "reportcustomerList", OnBegin = "showPage()", OnComplete = "offPage()",HttpMethod="Post" }))
+
+
+    </div>
+
+
+}
+
+
+

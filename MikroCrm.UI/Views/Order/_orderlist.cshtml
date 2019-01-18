@@ -1,0 +1,115 @@
+﻿@model MikroCrm.UI.ViewModel.OrderModel.OrderSearchViewModel
+@using PagedList;
+@using PagedList.Mvc;
+
+<table class="table table-bordered table-striped table-actions">
+    <thead>
+        <tr>
+            <th>Evrak Seri</th>
+            <th>Evrak No</th>
+            <th>Sip Tarih</th>
+            <th>Tes Tarih</th>
+            @*<th>Tipi</th>
+                <th>Sip Cinsi</th>*@
+            <th>Cari Kod</th>
+            <th>Cari Unvan</th>
+            <th class="text-center">Miktar</th>
+            <th>Tutar</th>
+            <th class="text-center"><span class="glyphicon glyphicon-cog"></span> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.OrderList.Count > 0)
+        {
+            foreach (var item in Model.OrderList)
+            {
+                <tr id="row_@item.KayitNo">
+                    <td>@item.EvrakSeri</td>
+                    <td>@item.EvrakNo</td>
+                    <td>@string.Format("{0:dd/MMMM/yyyy}", item.SiparisTarihi)</td>
+                    <td>@string.Format("{0:dd/MMMM/yyyy}", item.TeslimTarihi)</td>
+                    @*<td>@item.Tipi</td>
+                        <td>@item.SiparisCinsi</td>*@
+                    <td>@item.CariKodu</td>
+                    <td>@item.CariIsmi</td>
+                    <td class="text-center">@string.Format("{0:0.##}", item.Miktar)</td>
+                    <td>@String.Format("{0:C}", item.Tutar)</td>
+                    <td class="text-center"><a href="javascript:OrderDeleteRow(@item.KayitNo)" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a></td>
+                </tr>
+            }
+        }
+    </tbody>
+
+</table>
+<hr />
+<div class="pull-right" style="padding-right:5px">
+    @Html.PagedListPager(Model.OrderList, page => Url.Action("List", new RouteValueDictionary
+{
+    {"Page",page},
+    {"CariKod",Model.CariKod},
+    {"startDate",Model.startDate},
+    {"endDate",Model.endDate}
+}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "orderList", OnBegin = "showPage()", OnComplete = "offPage()" }))
+
+
+</div>
+
+<script>
+
+    function OrderDeleteRow(row) {
+        console.log(row);
+        if (row > 0) {
+
+            var box = $("#mb-remove-row");
+            box.addClass("open");
+
+            box.find(".mb-control-yes").on("click", function () {
+                box.removeClass("open");
+
+
+                $.ajax({
+                    type: "Post",
+                    url: "/Order/DeleteOrder",
+                    data: { 'Id': row },
+                    dataTpe: "Json",
+                    success: function (data) {
+                        if (data == "1") {
+
+                            $("#row_" + row).hide("slow", function () {
+                                $("#row_" + row).remove();
+                            });
+
+                        }
+                        else {
+                          //  noty({ text: 'Silme işlemi başarısız !', layout: 'topRight', type: 'error' });
+                        }
+                    }
+
+                });
+
+            });
+
+        }
+
+    }
+
+</script>
+
+
+<div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span> Veriyi <strong>Sil</strong> ?</div>
+            <div class="mb-content">
+                <p>Bu satırı silmek istediğinizden eminmisiniz?</p>
+                <p>Eminsen Evet'e basın.</p>
+            </div>
+            <div class="mb-footer">
+                <div class="pull-right">
+                    <a href="javascript:void(0)" class="btn btn-success btn-lg mb-control-yes">Evet</a>
+                    <a href="javascript:void(0)" class="btn btn-default btn-lg mb-control-close">Hayır</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

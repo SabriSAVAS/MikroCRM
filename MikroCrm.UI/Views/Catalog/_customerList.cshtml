@@ -1,0 +1,53 @@
+﻿@model MikroCrm.UI.ViewModel.CatalogModel.Customer.CustomerSearchViewModel
+@using PagedList.Mvc;
+@using PagedList;
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Cari Kod</th>
+            <th>Cari Unvan</th>
+            <th class="text-center">İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.CustomerList != null)
+        {
+            if (Model.CustomerList.Count > 0)
+            {
+                foreach (var item in Model.CustomerList)
+                {
+                    <tr>
+                        <td>
+                       <label id="carikod_@item.Id" data-id="@item.CariKod">
+                           @item.CariKod
+                       </label> 
+                        </td>
+                        <td>
+                            <label id="cariunvan_@item.Id" data-id="@item.CariUnvan">
+                            @item.CariUnvan
+                            </label> 
+                        </td>
+                        <td class="text-center">
+                          <button onclick="customerselect(@item.Id)" class="btn btn-default"><span  class="glyphicon glyphicon-ok-sign"></span></button>
+                        </td>
+                    </tr>
+                }
+
+            }
+        }
+    
+        
+    </tbody>
+</table>
+
+<div class="pull-right" style="padding-right:5px">
+    @Html.PagedListPager(Model.CustomerList, page => Url.Action("CustomerList", new RouteValueDictionary
+{
+    {"Page",page},
+    {"CariKod",Model.CariKod},
+    {"CariUnvan",Model.CariUnvan}
+}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "catalogcustomerlist" }))
+
+
+</div>

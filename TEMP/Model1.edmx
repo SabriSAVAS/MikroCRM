@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MikroDB_V15_11Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BANKALAR">
+          <Key>
+            <PropertyRef Name="ban_RECno" />
+          </Key>
+          <Property Name="ban_RECno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ban_RECid_DBCno" Type="smallint" Nullable="false" />
+          <Property Name="ban_RECid_RECno" Type="int" Nullable="false" />
+          <Property Name="ban_SpecRECNo" Type="int" />
+          <Property Name="ban_iptal" Type="bit" />
+          <Property Name="ban_fileid" Type="smallint" />
+          <Property Name="ban_hidden" Type="bit" />
+          <Property Name="ban_kilitli" Type="bit" />
+          <Property Name="ban_degisti" Type="bit" />
+          <Property Name="ban_CheckSum" Type="int" />
+          <Property Name="ban_create_user" Type="smallint" />
+          <Property Name="ban_create_date" Type="datetime" />
+          <Property Name="ban_lastup_user" Type="smallint" />
+          <Property Name="ban_lastup_date" Type="datetime" />
+          <Property Name="ban_special1" Type="nvarchar" MaxLength="4" />
+          <Property Name="ban_special2" Type="nvarchar" MaxLength="4" />
+          <Property Name="ban_special3" Type="nvarchar" MaxLength="4" />
+          <Property Name="ban_kod" Type="nvarchar" MaxLength="25" />
+          <Property Name="ban_ismi" Type="nvarchar" MaxLength="50" />
+          <Property Name="ban_sube" Type="nvarchar" MaxLength="50" />
+          <Property Name="ban_SwiftKodu" Type="nvarchar" MaxLength="25" />
+          <Property Name="ban_IBANKodu" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_hesapno" Type="nvarchar" MaxLength="30" />
+          <Property Name="ban_firma_no" Type="int" />
+          <Property Name="ban_hesap_tip" Type="tinyint" />
+          <Property Name="ban_mevduat_tip" Type="tinyint" />
+          <Property Name="ban_kredi_tip" Type="tinyint" />
+          <Property Name="ban_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ver_cek_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_tah_cek_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_tah_sen_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_tem_cek_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_tem_sen_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_mus_krdrkart_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_frm_krdrkart_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_must_havale_sozu_muh_kodu" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_firma_havale_emri_muh_kodu" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_tem_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_doviz_cinsi" Type="tinyint" />
+          <Property Name="ban_vade_fark_yuzde" Type="float" />
+          <Property Name="ban_kredi_tavan" Type="float" />
+          <Property Name="ban_risk_tavan" Type="float" />
+          <Property Name="ban_nakakincelenmesi" Type="bit" />
+          <Property Name="ban_TCMB_Kodu" Type="nvarchar" MaxLength="4" />
+          <Property Name="ban_TCMB_Sube_Kodu" Type="nvarchar" MaxLength="8" />
+          <Property Name="ban_TCMB_Il_kodu" Type="nvarchar" MaxLength="3" />
+          <Property Name="ban_musteri_no" Type="nvarchar" MaxLength="30" />
+          <Property Name="ban_Ayni_banka_tahsil_suresi" Type="tinyint" />
+          <Property Name="ban_baska_banka_tahsil_suresi" Type="tinyint" />
+          <Property Name="ban_odul_katkisi_hesap_cinsi" Type="tinyint" />
+          <Property Name="ban_odul_katkisi_hesabi" Type="nvarchar" MaxLength="25" />
+          <Property Name="ban_servis_komisyon_hesap_cinsi" Type="tinyint" />
+          <Property Name="ban_servis_komisyon_hesabi" Type="nvarchar" MaxLength="25" />
+          <Property Name="ban_erken_odm_faiz_hesap_cinsi" Type="tinyint" />
+          <Property Name="ban_erken_odm_faiz_hesabi" Type="nvarchar" MaxLength="25" />
+          <Property Name="ban_pos_tahsilat_cari_hesabi" Type="nvarchar" MaxLength="25" />
+          <Property Name="ban_adr_cadde" Type="nvarchar" MaxLength="50" />
+          <Property Name="ban_adr_mahalle" Type="nvarchar" MaxLength="50" />
+          <Property Name="ban_adr_sokak" Type="nvarchar" MaxLength="50" />
+          <Property Name="ban_adr_Semt" Type="nvarchar" MaxLength="25" />
+          <Property Name="ban_adr_Apt_No" Type="nvarchar" MaxLength="10" />
+          <Property Name="ban_adr_Daire_No" Type="nvarchar" MaxLength="10" />
+          <Property Name="ban_adr_posta_kodu" Type="nvarchar" MaxLength="8" />
+          <Property Name="ban_adr_ilce" Type="nvarchar" MaxLength="15" />
+          <Property Name="ban_adr_il" Type="nvarchar" MaxLength="15" />
+          <Property Name="ban_adr_ulke" Type="nvarchar" MaxLength="15" />
+          <Property Name="ban_adr_adres_kodu" Type="nvarchar" MaxLength="10" />
+          <Property Name="ban_tel_ulke_kodu" Type="nvarchar" MaxLength="5" />
+          <Property Name="ban_tel_bolge_kodu" Type="nvarchar" MaxLength="5" />
+          <Property Name="ban_tel_no1" Type="nvarchar" MaxLength="10" />
+          <Property Name="ban_tel_no2" Type="nvarchar" MaxLength="10" />
+          <Property Name="ban_tel_faxno" Type="nvarchar" MaxLength="10" />
+          <Property Name="ban_tel_modem" Type="nvarchar" MaxLength="10" />
+          <Property Name="ban_temsilci" Type="nvarchar" MaxLength="50" />
+          <Property Name="ban_temsilci_email" Type="nvarchar" MaxLength="80" />
+          <Property Name="ban_ufrs_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_ver_cek_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_tah_cek_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_tah_sen_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_tem_cek_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_tem_sen_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_mus_krdrkart_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_frm_krdrkart_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_must_havale_sozu_muh_kodu" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_firma_havale_emri_muh_kodu" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_ver_cek_sinif_muh_kod" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_frm_hav_emri_sinif_muh_kodu" Type="nvarchar" MaxLength="40" />
+          <Property Name="ban_ufrs_tem_muh_kod" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityContainer Name="MikroDB_V15_11ModelStoreContainer">
+          <EntitySet Name="BANKALAR" EntityType="Self.BANKALAR" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MikroDB_V15_11Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MikroDB_V15_11Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BANKALARs" EntityType="MikroDB_V15_11Model.BANKALAR" />
+        </EntityContainer>
+        <EntityType Name="BANKALAR">
+          <Key>
+            <PropertyRef Name="ban_RECno" />
+          </Key>
+          <Property Name="ban_RECno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ban_RECid_DBCno" Type="Int16" Nullable="false" />
+          <Property Name="ban_RECid_RECno" Type="Int32" Nullable="false" />
+          <Property Name="ban_SpecRECNo" Type="Int32" />
+          <Property Name="ban_iptal" Type="Boolean" />
+          <Property Name="ban_fileid" Type="Int16" />
+          <Property Name="ban_hidden" Type="Boolean" />
+          <Property Name="ban_kilitli" Type="Boolean" />
+          <Property Name="ban_degisti" Type="Boolean" />
+          <Property Name="ban_CheckSum" Type="Int32" />
+          <Property Name="ban_create_user" Type="Int16" />
+          <Property Name="ban_create_date" Type="DateTime" Precision="3" />
+          <Property Name="ban_lastup_user" Type="Int16" />
+          <Property Name="ban_lastup_date" Type="DateTime" Precision="3" />
+          <Property Name="ban_special1" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="ban_special2" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="ban_special3" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="ban_kod" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ismi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ban_sube" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ban_SwiftKodu" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ban_IBANKodu" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_hesapno" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ban_firma_no" Type="Int32" />
+          <Property Name="ban_hesap_tip" Type="Byte" />
+          <Property Name="ban_mevduat_tip" Type="Byte" />
+          <Property Name="ban_kredi_tip" Type="Byte" />
+          <Property Name="ban_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ver_cek_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_tah_cek_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_tah_sen_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_tem_cek_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_tem_sen_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_mus_krdrkart_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_frm_krdrkart_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_must_havale_sozu_muh_kodu" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_firma_havale_emri_muh_kodu" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_tem_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_doviz_cinsi" Type="Byte" />
+          <Property Name="ban_vade_fark_yuzde" Type="Double" />
+          <Property Name="ban_kredi_tavan" Type="Double" />
+          <Property Name="ban_risk_tavan" Type="Double" />
+          <Property Name="ban_nakakincelenmesi" Type="Boolean" />
+          <Property Name="ban_TCMB_Kodu" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="ban_TCMB_Sube_Kodu" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="ban_TCMB_Il_kodu" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="ban_musteri_no" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ban_Ayni_banka_tahsil_suresi" Type="Byte" />
+          <Property Name="ban_baska_banka_tahsil_suresi" Type="Byte" />
+          <Property Name="ban_odul_katkisi_hesap_cinsi" Type="Byte" />
+          <Property Name="ban_odul_katkisi_hesabi" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ban_servis_komisyon_hesap_cinsi" Type="Byte" />
+          <Property Name="ban_servis_komisyon_hesabi" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ban_erken_odm_faiz_hesap_cinsi" Type="Byte" />
+          <Property Name="ban_erken_odm_faiz_hesabi" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ban_pos_tahsilat_cari_hesabi" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ban_adr_cadde" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ban_adr_mahalle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ban_adr_sokak" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ban_adr_Semt" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ban_adr_Apt_No" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ban_adr_Daire_No" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ban_adr_posta_kodu" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="ban_adr_ilce" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ban_adr_il" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ban_adr_ulke" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ban_adr_adres_kodu" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ban_tel_ulke_kodu" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ban_tel_bolge_kodu" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ban_tel_no1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ban_tel_no2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ban_tel_faxno" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ban_tel_modem" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ban_temsilci" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ban_temsilci_email" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_ver_cek_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_tah_cek_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_tah_sen_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_tem_cek_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_tem_sen_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_mus_krdrkart_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_frm_krdrkart_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_must_havale_sozu_muh_kodu" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_firma_havale_emri_muh_kodu" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_ver_cek_sinif_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_frm_hav_emri_sinif_muh_kodu" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ban_ufrs_tem_muh_kod" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MikroDB_V15_11ModelStoreContainer" CdmEntityContainer="MikroDB_V15_11Entities">
+          <EntitySetMapping Name="BANKALARs">
+            <EntityTypeMapping TypeName="MikroDB_V15_11Model.BANKALAR">
+              <MappingFragment StoreEntitySet="BANKALAR">
+                <ScalarProperty Name="ban_ufrs_tem_muh_kod" ColumnName="ban_ufrs_tem_muh_kod" />
+                <ScalarProperty Name="ban_ufrs_frm_hav_emri_sinif_muh_kodu" ColumnName="ban_ufrs_frm_hav_emri_sinif_muh_kodu" />
+                <ScalarProperty Name="ban_ufrs_ver_cek_sinif_muh_kod" ColumnName="ban_ufrs_ver_cek_sinif_muh_kod" />
+                <ScalarProperty Name="ban_ufrs_firma_havale_emri_muh_kodu" ColumnName="ban_ufrs_firma_havale_emri_muh_kodu" />
+                <ScalarProperty Name="ban_ufrs_must_havale_sozu_muh_kodu" ColumnName="ban_ufrs_must_havale_sozu_muh_kodu" />
+                <ScalarProperty Name="ban_ufrs_frm_krdrkart_muh_kod" ColumnName="ban_ufrs_frm_krdrkart_muh_kod" />
+                <ScalarProperty Name="ban_ufrs_mus_krdrkart_muh_kod" ColumnName="ban_ufrs_mus_krdrkart_muh_kod" />
+                <ScalarProperty Name="ban_ufrs_tem_sen_muh_kod" ColumnName="ban_ufrs_tem_sen_muh_kod" />
+                <ScalarProperty Name="ban_ufrs_tem_cek_muh_kod" ColumnName="ban_ufrs_tem_cek_muh_kod" />
+                <ScalarProperty Name="ban_ufrs_tah_sen_muh_kod" ColumnName="ban_ufrs_tah_sen_muh_kod" />
+                <ScalarProperty Name="ban_ufrs_tah_cek_muh_kod" ColumnName="ban_ufrs_tah_cek_muh_kod" />
+                <ScalarProperty Name="ban_ufrs_ver_cek_muh_kod" ColumnName="ban_ufrs_ver_cek_muh_kod" />
+                <ScalarProperty Name="ban_ufrs_muh_kod" ColumnName="ban_ufrs_muh_kod" />
+                <ScalarProperty Name="ban_temsilci_email" ColumnName="ban_temsilci_email" />
+                <ScalarProperty Name="ban_temsilci" ColumnName="ban_temsilci" />
+                <ScalarProperty Name="ban_tel_modem" ColumnName="ban_tel_modem" />
+                <ScalarProperty Name="ban_tel_faxno" ColumnName="ban_tel_faxno" />
+                <ScalarProperty Name="ban_tel_no2" ColumnName="ban_tel_no2" />
+                <ScalarProperty Name="ban_tel_no1" ColumnName="ban_tel_no1" />
+                <ScalarProperty Name="ban_tel_bolge_kodu" ColumnName="ban_tel_bolge_kodu" />
+                <ScalarProperty Name="ban_tel_ulke_kodu" ColumnName="ban_tel_ulke_kodu" />
+                <ScalarProperty Name="ban_adr_adres_kodu" ColumnName="ban_adr_adres_kodu" />
+                <ScalarProperty Name="ban_adr_ulke" ColumnName="ban_adr_ulke" />
+                <ScalarProperty Name="ban_adr_il" ColumnName="ban_adr_il" />
+                <ScalarProperty Name="ban_adr_ilce" ColumnName="ban_adr_ilce" />
+                <ScalarProperty Name="ban_adr_posta_kodu" ColumnName="ban_adr_posta_kodu" />
+                <ScalarProperty Name="ban_adr_Daire_No" ColumnName="ban_adr_Daire_No" />
+                <ScalarProperty Name="ban_adr_Apt_No" ColumnName="ban_adr_Apt_No" />
+                <ScalarProperty Name="ban_adr_Semt" ColumnName="ban_adr_Semt" />
+                <ScalarProperty Name="ban_adr_sokak" ColumnName="ban_adr_sokak" />
+                <ScalarProperty Name="ban_adr_mahalle" ColumnName="ban_adr_mahalle" />
+                <ScalarProperty Name="ban_adr_cadde" ColumnName="ban_adr_cadde" />
+                <ScalarProperty Name="ban_pos_tahsilat_cari_hesabi" ColumnName="ban_pos_tahsilat_cari_hesabi" />
+                <ScalarProperty Name="ban_erken_odm_faiz_hesabi" ColumnName="ban_erken_odm_faiz_hesabi" />
+                <ScalarProperty Name="ban_erken_odm_faiz_hesap_cinsi" ColumnName="ban_erken_odm_faiz_hesap_cinsi" />
+                <ScalarProperty Name="ban_servis_komisyon_hesabi" ColumnName="ban_servis_komisyon_hesabi" />
+                <ScalarProperty Name="ban_servis_komisyon_hesap_cinsi" ColumnName="ban_servis_komisyon_hesap_cinsi" />
+                <ScalarProperty Name="ban_odul_katkisi_hesabi" ColumnName="ban_odul_katkisi_hesabi" />
+                <ScalarProperty Name="ban_odul_katkisi_hesap_cinsi" ColumnName="ban_odul_katkisi_hesap_cinsi" />
+                <ScalarProperty Name="ban_baska_banka_tahsil_suresi" ColumnName="ban_baska_banka_tahsil_suresi" />
+                <ScalarProperty Name="ban_Ayni_banka_tahsil_suresi" ColumnName="ban_Ayni_banka_tahsil_suresi" />
+                <ScalarProperty Name="ban_musteri_no" ColumnName="ban_musteri_no" />
+                <ScalarProperty Name="ban_TCMB_Il_kodu" ColumnName="ban_TCMB_Il_kodu" />
+                <ScalarProperty Name="ban_TCMB_Sube_Kodu" ColumnName="ban_TCMB_Sube_Kodu" />
+                <ScalarProperty Name="ban_TCMB_Kodu" ColumnName="ban_TCMB_Kodu" />
+                <ScalarProperty Name="ban_nakakincelenmesi" ColumnName="ban_nakakincelenmesi" />
+                <ScalarProperty Name="ban_risk_tavan" ColumnName="ban_risk_tavan" />
+                <ScalarProperty Name="ban_kredi_tavan" ColumnName="ban_kredi_tavan" />
+                <ScalarProperty Name="ban_vade_fark_yuzde" ColumnName="ban_vade_fark_yuzde" />
+                <ScalarProperty Name="ban_doviz_cinsi" ColumnName="ban_doviz_cinsi" />
+                <ScalarProperty Name="ban_tem_muh_kod" ColumnName="ban_tem_muh_kod" />
+                <ScalarProperty Name="ban_firma_havale_emri_muh_kodu" ColumnName="ban_firma_havale_emri_muh_kodu" />
+                <ScalarProperty Name="ban_must_havale_sozu_muh_kodu" ColumnName="ban_must_havale_sozu_muh_kodu" />
+                <ScalarProperty Name="ban_frm_krdrkart_muh_kod" ColumnName="ban_frm_krdrkart_muh_kod" />
+                <ScalarProperty Name="ban_mus_krdrkart_muh_kod" ColumnName="ban_mus_krdrkart_muh_kod" />
+                <ScalarProperty Name="ban_tem_sen_muh_kod" ColumnName="ban_tem_sen_muh_kod" />
+                <ScalarProperty Name="ban_tem_cek_muh_kod" ColumnName="ban_tem_cek_muh_kod" />
+                <ScalarProperty Name="ban_tah_sen_muh_kod" ColumnName="ban_tah_sen_muh_kod" />
+                <ScalarProperty Name="ban_tah_cek_muh_kod" ColumnName="ban_tah_cek_muh_kod" />
+                <ScalarProperty Name="ban_ver_cek_muh_kod" ColumnName="ban_ver_cek_muh_kod" />
+                <ScalarProperty Name="ban_muh_kod" ColumnName="ban_muh_kod" />
+                <ScalarProperty Name="ban_kredi_tip" ColumnName="ban_kredi_tip" />
+                <ScalarProperty Name="ban_mevduat_tip" ColumnName="ban_mevduat_tip" />
+                <ScalarProperty Name="ban_hesap_tip" ColumnName="ban_hesap_tip" />
+                <ScalarProperty Name="ban_firma_no" ColumnName="ban_firma_no" />
+                <ScalarProperty Name="ban_hesapno" ColumnName="ban_hesapno" />
+                <ScalarProperty Name="ban_IBANKodu" ColumnName="ban_IBANKodu" />
+                <ScalarProperty Name="ban_SwiftKodu" ColumnName="ban_SwiftKodu" />
+                <ScalarProperty Name="ban_sube" ColumnName="ban_sube" />
+                <ScalarProperty Name="ban_ismi" ColumnName="ban_ismi" />
+                <ScalarProperty Name="ban_kod" ColumnName="ban_kod" />
+                <ScalarProperty Name="ban_special3" ColumnName="ban_special3" />
+                <ScalarProperty Name="ban_special2" ColumnName="ban_special2" />
+                <ScalarProperty Name="ban_special1" ColumnName="ban_special1" />
+                <ScalarProperty Name="ban_lastup_date" ColumnName="ban_lastup_date" />
+                <ScalarProperty Name="ban_lastup_user" ColumnName="ban_lastup_user" />
+                <ScalarProperty Name="ban_create_date" ColumnName="ban_create_date" />
+                <ScalarProperty Name="ban_create_user" ColumnName="ban_create_user" />
+                <ScalarProperty Name="ban_CheckSum" ColumnName="ban_CheckSum" />
+                <ScalarProperty Name="ban_degisti" ColumnName="ban_degisti" />
+                <ScalarProperty Name="ban_kilitli" ColumnName="ban_kilitli" />
+                <ScalarProperty Name="ban_hidden" ColumnName="ban_hidden" />
+                <ScalarProperty Name="ban_fileid" ColumnName="ban_fileid" />
+                <ScalarProperty Name="ban_iptal" ColumnName="ban_iptal" />
+                <ScalarProperty Name="ban_SpecRECNo" ColumnName="ban_SpecRECNo" />
+                <ScalarProperty Name="ban_RECid_RECno" ColumnName="ban_RECid_RECno" />
+                <ScalarProperty Name="ban_RECid_DBCno" ColumnName="ban_RECid_DBCno" />
+                <ScalarProperty Name="ban_RECno" ColumnName="ban_RECno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,210 @@
+﻿@model MikroCrm.UI.ViewModel.ProformaOrderModel.ProformaOrderSearchViewModel
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="page-content-wrap">
+    @using (Ajax.BeginForm("List", "ProformaOrder", FormMethod.Post, new AjaxOptions { OnSuccess = "ajaxsuccess", OnBegin = "showPage()", OnComplete = "offPage()", OnFailure = "offPage()" }))
+    {
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Arama
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Cari Kod</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(x => x.CariKod, new { @class = "form-control" })
+
+                                                <span onclick="customerSelect()" class="input-group-addon"><span class="fa fa-plus-square"></span></span>
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.CariKod)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Cari Unvan</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                @Html.TextBoxFor(x => x.CariUnvan, new { @class = "form-control" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.CariUnvan)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">İlk Tarih</label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                @Html.TextBoxFor(x => x.startDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.startDate)</span>
+                                        </div>
+                                   
+                                        <label class="col-md-2 control-label">Son Tarih</label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                @Html.TextBoxFor(x => x.endDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.endDate)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                     
+
+                                        <label class="col-md-2 control-label">Tekniksyen</label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                @Html.DropDownListFor(x => x.TekniksyenAd,Model.TekniksyenAdList,"Seçiniz", new { @class = "form-control" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.TekniksyenAd)</span>
+                                        </div>
+                                    
+
+                                        <label class="col-md-2 control-label">Durum</label>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                @Html.DropDownListFor(x => x.Durum,Model.DurumList, "Seçiniz", new { @class = "form-control" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.Durum)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-footer">
+                            <button type="submit" class="pull-right btn btn-info">Ara</button>
+                            <a href="/ProformaOrder/AddOrder" class="btn btn-success"><i class="fa fa-plus"> Yeni servis</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading ui-draggable-handle">
+                    <h3 class="panel-title">Proforma sipariş listesi</h3>
+                    <ul class="panel-controls">
+
+                        <li>
+
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="panel-body panel-body-table tab-content">
+
+                    <div class="table-responsive">
+                        <div id="proformaorderList">
+                           @Html.Partial("_proformaorderList", Model)
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="panel-footer">
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+@Html.Action("CustomerList", "Catalog")
+
+
+
+@section scripts{
+    <script>
+        function customerSelect() {
+            $('#customerPopup').modal('show');
+        }
+    </script>
+
+    <script>
+        function customerselect(id) {
+
+            console.log(id);
+
+            if (id>0) {
+                var carikod = $("#carikod_"+ id).attr("data-id");
+
+                var cariuncan = $("#cariunvan_" + id).attr("data-id");
+                console.log(carikod);
+                console.log(cariuncan);
+                if (carikod.length > 0) {
+                    $("#CariKod").val(carikod);
+
+                    $("#CariUnvan").val(cariuncan);
+                    $('#customerPopup').modal('hide');
+                }
+            }
+        }
+    </script>
+
+    @*<script>
+
+        function delete_row(row) {
+
+            var box = $("#mb-remove-row");
+            box.addClass("open");
+
+            box.find(".mb-control-yes").on("click", function () {
+                box.removeClass("open");
+                $("#" + row).hide("slow", function () {
+                    $(this).remove();
+                });
+            });
+
+        }
+
+    </script>*@
+
+    <script>
+        function showPage() {
+            console.log("show");
+            document.getElementById("loader").style.display = "block";
+
+        }
+        function offPage() {
+            console.log("off");
+            document.getElementById("loader").style.display = "none";
+
+        }
+    </script>
+    <script>
+        function ajaxsuccess(result) {
+
+            $("#proformaorderList").html(result);
+        }
+    </script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+}

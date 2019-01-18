@@ -1,0 +1,102 @@
+﻿@model MikroCrm.UI.ViewModel.ReportModel.Customer.CustomerModel
+@{
+    ViewBag.Title = "CustomerSearch";
+}
+
+
+@{
+    ViewBag.Title = "CustomerSearch";
+}
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css"
+      rel="Stylesheet" type="text/css" />
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <b>Cari Durum Sorgula</b>
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-3 col-md-3">
+                        <label class="pull-right">Cari Ünvan</label>
+                    </div>
+                    <div class="col-xs-9 col-md-9">
+                        <input type="text" id="caridurum" class="form-control" placeholder="Cari unvan bilgilerini yaziniz..." value="" />
+                    </div>
+                </div>
+                <hr />
+                <div id="caridurumbil">
+                    @Html.Partial("_customersearch",Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <style>
+        .loadinggif {
+            background: url('../../Content/ajax-loader.gif') no-repeat right center;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#caridurum").addClass('loadinggif');
+            $("#caridurum").autocomplete({
+                source: '/Report/AutoComplete',
+                //minLenght: 1,
+                //Örnekte Hatalı Yazılmış. Doğrusu:
+                minLenght:2,
+                select: function (event, ui) {
+                    console.log(ui.item.id);
+                    GetCariBilgi(ui.item.id);
+                    $("#caridurum").removeClass('loadinggif');
+                }
+            });
+            $("#caridurum").removeClass('loadinggif');
+        });
+    </script>
+
+    <script>
+        function GetCariBilgi(kod) {
+
+            showPage();
+            $.ajax({
+
+                type: "POST",
+                url: "/Report/GetCustomer",
+                data: {'kod':kod},
+                dataType: "Html",
+                success: function (data) {
+                   
+                    $("#caridurumbil").html(data);
+                    offPage();
+                }
+
+
+            })
+
+
+        }
+    </script>
+
+<script>
+        function showPage() {
+            console.log("show");
+            document.getElementById("loader").style.display = "block";
+
+        }
+        function offPage() {
+            console.log("off");
+            document.getElementById("loader").style.display = "none";
+
+        }
+</script>
+}
+
+
+
+
+
+

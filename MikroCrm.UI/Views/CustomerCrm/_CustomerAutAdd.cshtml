@@ -1,0 +1,93 @@
+﻿@model MikroCrm.UI.ViewModel.CustomerCrmModel.CustomerAutAddViewModel
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="customerAutAdd" tabindex="-1" role="dialog" aria-labelledby="myModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Yetkili Ekle</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="form-horizontal">
+
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-12 control-label">Müşteri Ad:</label>
+                                    <div class="col-md-6 col-xs-12">
+                                        @Html.TextBoxFor(x => x.mye_isim, new { @class = "form-control" })
+                                        <span class="help-block">
+                                            @Html.ValidationMessage("Müşteri adı giriniz.")
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-12 control-label">Müşteri Soyad:</label>
+                                    <div class="col-md-6 col-xs-12">
+                                        @Html.TextBoxFor(x => x.mye_soyisim, new { @class = "form-control" })
+                                        <span class="help-block">
+                                            @Html.ValidationMessage("Müşteri soyisim giriniz.")
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a href="javascript:customerautadd()" class="btn btn-success">Ekle</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function customerautadd() {
+        var mye_cari_kod = $("#CariKod").val();
+        var mye_isim = $("#mye_isim").val();
+        var mye_soyisim = $("#mye_soyisim").val();
+        if (mye_isim.length > 3 && mye_soyisim.length > 3) {
+
+
+            var data = {
+                mye_cari_kod: mye_cari_kod,
+                mye_isim: mye_isim,
+                mye_soyisim: mye_soyisim
+            };
+            $.ajax({
+                type: "post",
+                url: "/CustomerCrm/AddAutCrm",
+                data: data,
+                success: function (result) {
+                    if (result == "1") {
+                        noty({ text: "Kayıt işlemi başarılı.", layout: 'topRight', type: 'success' });
+                        $("#customerAutAdd").modal("hide");
+                    }
+                    else if (result == "-1") {
+                        noty({ text: "Kayıt işlemi başarısız.", layout: 'topRight', type: 'error' });
+                    }
+                    else {
+                        noty({ text: result, layout: 'topRight', type: 'warning' });
+                    }
+                }
+
+            });
+        }
+        else {
+            noty({ text: "Yetkili adı ve soyadı giriniz.", layout: 'topRight', type: 'warning' });
+        }
+    }
+</script>

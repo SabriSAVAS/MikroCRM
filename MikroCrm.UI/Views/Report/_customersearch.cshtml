@@ -1,0 +1,107 @@
+﻿@model MikroCrm.UI.ViewModel.ReportModel.Customer.CustomerModel
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading ui-draggable-handle">
+        <h3 class="panel-title">Cari Bilgiler</h3>
+    </div>
+    <div class="panel-body">    
+       
+        <table class="table">
+         
+            <tbody>
+                <tr>
+                    <td width="135x" class="text-right"><b> Cari Kod :</b></td>
+                    <td>@Model.CariKod</td>
+                   
+                </tr>
+
+                <tr>
+                    <td class="text-right"><b> Cari Ünvan :</b></td>
+                    <td>@Model.CariUnvan</td>
+                </tr>
+
+                <tr>
+                    <td class="text-right"><b> Vergi D/N :</b></td>
+                    <td>@Model.VergiDairesi  / @Model.VergiNumarası</td>
+                </tr>
+
+                <tr>
+                    <td class="text-right"><b> e-Mail :</b></td>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <td class="text-right"><b> Web Adresi :</b></td>
+                    <td>@Model.WebAdresi</td>
+                </tr>
+                <tr>
+                    <td class="text-right"><b> e-Fatura Başlangıç :</b></td>
+                    <td>@string.Format("{0:dd MMM yyyy}", Model.eFaturaBaslangicTarihi)</td>
+                   
+                </tr>
+                <tr>
+                    <td class="text-right"><b> e-Fatura Durum :</b></td>
+                    <td>@Model.Email</td>
+
+                </tr>
+                <tr>
+                    <td class="text-right"><b> Bakiye :</b></td>
+                    <td>@string.Format("{0:C}", Model.Bakiye)</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading ui-draggable-handle">
+        <h3 class="panel-title">Cari Adres Bilgileri</h3>
+    </div>
+    <div class="panel-body">
+
+        <table class="table">
+
+            <tbody>
+                <tr>
+                    <td width="135px" class="text-right"><b> Adres 1 :</b></td>
+                    <td>@Model.Adres1</td>
+
+                </tr>
+
+                <tr>
+                    <td class="text-right"><b> Adres 2 :</b></td>
+                    <td>@Model.Adres2</td>
+                </tr>
+
+                <tr>
+                    <td class="text-right"><b> Posta Kodu :</b></td>
+                    <td>@Model.PostaKodu</td>
+                </tr>
+
+                <tr>
+                    <td class="text-right"><b> İl :</b></td>
+                    <td>@Model.Il</td>
+                </tr>
+                <tr>
+                    <td class="text-right"><b> İlçe :</b></td>
+                    <td>@Model.Ilce</td>
+                </tr>
+                <tr>
+                    <td class="text-right"><b> Tel 1 :</b></td>
+                    <td>@Model.BolgeKod @Model.Tel1</td>
+
+                </tr>
+                <tr>
+                    <td class="text-right"><b> Tel 2 :</b></td>
+                    <td>@Model.BolgeKod @Model.Tel2</td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

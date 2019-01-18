@@ -1,0 +1,439 @@
+﻿@model MikroCrm.UI.ViewModel.ProformaOrderModel.ProformaOrderViewModel
+@{
+    ViewBag.Title = "AddOrder";
+}
+
+
+
+<div class="page-content-wrap">
+    @using (Ajax.BeginForm("AddOrder", "ProformaOrder", FormMethod.Post, new AjaxOptions { OnSuccess = "proformaAddOrderSuccess", OnBegin = "showPage()", OnComplete = "offPage()", OnFailure = "offPage()" }))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-horizontal">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Servis Ekle
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Cari Kod</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(x => x.CariKod, new { @class = "form-control" })
+                                                <span onclick="customerSelect()" class="input-group-addon"><span class="fa fa-plus-square"></span></span>
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.CariKod)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Cari Unvan</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                @Html.TextBoxFor(x => x.CariUnvan, new { @class = "form-control" })
+                                            </div>
+                                            <span class="help-block">@Html.ValidationMessageFor(x => x.CariUnvan)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    
+                                            <div class="col-md-12">
+                                                <label class="col-md-2 control-label">Evrak Seri</label>
+                                                <div class="col-md-4">
+                                                   
+                                                    <div class="input-group">
+                                                        @Html.TextBoxFor(x => x.EvrakSeri, new {  @class = "form-control", @onblur="EvrakBlur()" })
+                                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+
+                                                    </div>
+                                                    <span class="help-block">@Html.ValidationMessageFor(x => x.EvrakSeri)</span>
+                                                </div>
+
+                                                <label class="col-md-2 control-label">Evrak Sira</label>
+                                                <div class="col-md-4">
+                                                    <div class="input-group">
+                                                        @Html.TextBoxFor(x => x.EvrakSira, new { @class = "form-control" })
+                                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                    </div>
+                                                    <span class="help-block">@Html.ValidationMessageFor(x => x.EvrakSira)</span>
+                                                </div>
+                                            </div>
+                                     
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="col-md-2 control-label">Bas Saat</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group bootstrap-timepicker">
+                                                    @Html.TextBoxFor(x => x.BasSaati, new { @class = "form-control timepicker24" })
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+
+                                                </div>
+                                                <span class="help-block">@Html.ValidationMessageFor(x => x.BasSaati)</span>
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Bit Saat</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group bootstrap-timepicker">
+                                                    @Html.TextBoxFor(x => x.BitSaati, new { @class = "form-control timepicker24" })
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                                </div>
+                                                <span class="help-block">@Html.ValidationMessageFor(x => x.BitSaati)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="col-md-2 control-label">Teknikseyen</label>
+                                            <div class="col-md-4">
+
+                                                @Html.DropDownListFor(x => x.TekniksyenKod, Model.TekniksyenList, "Seçiniz", new { @class = "form-control" })
+                                                <span class="help-block">@Html.ValidationMessageFor(x => x.TekniksyenKod)</span>
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Tarih</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    @Html.TextBoxFor(x => x.Tarih, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker" })
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                </div>
+                                                <span class="help-block">@Html.ValidationMessageFor(x => x.Tarih)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="panel-footer">
+                            <a class="btn btn-success" href="javascript:hizmetSelect()"><span class="fa fa-plus"> Hizmet ekle</span></a>
+                            <a class="btn btn-success" href="javascript:stockSelect()"><span class="fa fa-plus"> Stok ekle</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-horizontal">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Servis Listesi
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="table-responsive">
+                                        <div id="proformabasketorderlist">
+                                            @Html.Partial("_basketproformaorderlist", Model)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Aciklama1</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                    @Html.TextBoxFor(x => x.Aciklama1, new { @class = "form-control" })
+                                                </div>
+                                                <span class="help-block">@Html.ValidationMessageFor(x => x.Aciklama1)</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Aciklama2</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                    @Html.TextBoxFor(x => x.Aciklama2, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Aciklama3</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                    @Html.TextBoxFor(x => x.Aciklama3, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Aciklama4</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                    @Html.TextBoxFor(x => x.Aciklama4, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Aciklama5</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                    @Html.TextBoxFor(x => x.Aciklama5, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <button type="submit" class="pull-right btn btn-primary">
+                                Kaydet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/bootstrap-timepicker.min.js"></script>
+
+}
+
+<script>
+    function orderOnSuccess(result) {
+        console.log("result=" + result);
+        if (result == "1") {
+            window.location.href = "/ProformaOrder/List";
+        }
+
+
+
+    }
+    function OnFailure(result) {
+        console.log(result);
+    }
+</script>
+<script>
+    function customerSelect() {
+        $('#customerPopup').modal('show');
+    }
+    function stockSelect() {
+        $('#stockPopup').modal('show');
+    }
+    function hizmetSelect() {
+        $('#hizmetPopup').modal('show');
+    }
+</script>
+<script>
+    function customerselect(id) {
+
+        console.log(id);
+
+        if (id > 0) {
+            var carikod = $("#carikod_" + id).attr("data-id");
+
+            var cariuncan = $("#cariunvan_" + id).attr("data-id");
+            console.log(carikod);
+            console.log(cariuncan);
+            if (carikod.length > 0) {
+                $("#CariKod").val(carikod);
+
+                $("#CariUnvan").val(cariuncan);
+                $('#customerPopup').modal('hide');
+            }
+        }
+    }
+
+    function stockselect(id) {
+
+        console.log(id);
+        showPage();
+        if (id > 0) {
+            var stokod = $("#stokkod_" + id).attr("data-id");
+
+            var stokad = $("#stokad_" + id).attr("data-id");
+            console.log(stokod);
+            console.log(stokad);
+            if (stokod.length > 0) {
+
+                AddBasketOrder("", "Stok", stokod, stokad);
+                $('#stockPopup').modal('hide');
+
+            }
+        }
+        offPage();
+    }
+    function hizmetselect(id) {
+
+        console.log(id);
+        showPage();
+        if (id > 0) {
+            var hizmetkod = $("#hizmetkod_" + id).attr("data-id");
+
+            var hizmetad = $("#hizmetad_" + id).attr("data-id");
+            console.log(hizmetkod);
+            console.log(hizmetad);
+            if (hizmetkod.length > 0) {
+
+                AddBasketOrder("ES", "Hizmet", hizmetkod, hizmetad);
+                $('#hizmetPopup').modal('hide');
+
+            }
+        }
+        offPage();
+    }
+    function AddBasketOrder(special, hizmettip, hizmetkod, hizmetad) {
+
+        console.log("add order=", special, hizmettip, hizmetkod, hizmetad);
+
+        $.ajax({
+            type: "Post",
+            url: "/ProformaOrder/AddBasketOrder",
+            data: { "special": special, "hizmettip": hizmettip, "hizmetkod": hizmetkod, "hizmetad": hizmetad },
+            dataType: "Json",
+            success: function (data) {
+                if (data == "1") {
+                    GetOrderBasketList();
+                }
+            }
+        })
+
+    }
+
+    function GetOrderBasketList() {
+
+        $.ajax({
+            type: "Post",
+            url: "/ProformaOrder/GetOrderBasketList",
+            dataType: "html",
+            success: function (data) {
+                $("#proformabasketorderlist").html(data);
+            }
+        })
+
+    }
+</script>
+<script>
+    function proformaAddOrderSuccess(result) {
+        if (result == "1") {
+            window.location.href = "/ProformaOrder/List";
+        }
+    }
+</script>
+<script>
+    function EvrakBlur() {
+        var evrakseri = $("#EvrakSeri").val();
+        if (evrakseri.length > 0) {
+            $.ajax({
+                type: "Post",
+                url: "/ProformaOrder/GetEvrakSiraNo",
+                data: { "evrakseri": evrakseri },
+                dataType: "Json",
+                success: function (data) {
+                    console.log(data);
+                        $("#EvrakSira").val(data);
+                   
+                }
+            })
+        }
+    }
+</script>
+<script>
+    function showPage() {
+        console.log("show");
+        document.getElementById("loader").style.display = "block";
+
+    }
+    function offPage() {
+        console.log("off");
+        document.getElementById("loader").style.display = "none";
+
+    }
+</script>
+
+
+
+<script>
+
+    function OrderDeleteRow(row) {
+        var stokkod = $("#stok_" + row).attr("data-id");
+
+        console.log(stokkod);
+        if (stokkod.length > 0) {
+
+            var box = $("#mb-remove-row");
+            box.addClass("open");
+
+            box.find(".mb-control-yes").on("click", function () {
+                box.removeClass("open");
+
+                $.ajax({
+                    type: "Post",
+                    url: "/ProformaOrder/OrderDeleteRow",
+                    data: { 'stokkod': stokkod },
+                    dataTpe: "Json",
+                    success: function (data) {
+                        if (data == "1") {
+                          //  GetBasketOrderList();
+                            $("#row_" + row).hide("slow", function () {
+                                $("#row_" + row).remove();
+                            });
+
+                        }
+                    }
+
+                });
+
+            });
+
+
+        }
+
+    }
+
+</script>
+<div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span>Veriyi<strong>Sil</strong> ?</div>
+            <div class="mb-content">
+                <p>Bu satırı silmek istediğinizden eminmisiniz?</p>
+                <p>Eminsen Evet'e basın.</p>
+            </div>
+            <div class="mb-footer">
+                <div class="pull-right">
+                    <a href="javascript:void(0)" class="btn btn-success btn-lg mb-control-yes">Evet</a>
+                    <a href="javascript:void(0)" class="btn btn-default btn-lg mb-control-close">Hayır</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@Html.Action("CustomerList", "Catalog")
+@Html.Action("StockList", "Catalog")
+@Html.Action("HizmetList", "Catalog")
+
+
+
+
